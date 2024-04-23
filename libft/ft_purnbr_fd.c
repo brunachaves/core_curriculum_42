@@ -1,5 +1,4 @@
 #include "libft.h"
-#include <unistd.h>
 
 int ft_digits(int nb)
 {
@@ -18,31 +17,31 @@ int ft_digits(int nb)
     return (digits);
 }
 
-int ft_power(int digits)
+int ft_base(int digits)
 {
-    int power;
+    int base;
     int aux_dig;
 
-    power = 1;
+    base = 1;
     aux_dig = digits;
     if (aux_dig ==  1)
         return (1);
     while (aux_dig > 1)
     {
-        power *= 10;
+        base *= 10;
         aux_dig--;
     }
-    return (power);
+    return (base);
 }
 
 void    ft_putnbr_fd(int n, int fd)
 {
     char    c;
-    int power;
+    int base;
     int digits;
 
     digits = ft_digits(nb);
-    power = ft_power(digits);
+    base = ft_base(digits);
     if (nb == -2147483648)
             write(fd, "-2147483648", 11);
     else if (nb < 0)
@@ -54,12 +53,11 @@ void    ft_putnbr_fd(int n, int fd)
     {
         while(digits)
         {
-            c = nb / power + '0';
+            c = nb / base + '0';
             write(fd, &c, 1);
-            nb %= power;
-            power /= 10;
+            nb %= base;
+            base /= 10;
             digits--;
         }
     }
 }
-

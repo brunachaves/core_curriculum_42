@@ -1,12 +1,5 @@
 #include "libft.h"
 
-int ft_is_space(int n)
-{
-    if ((n > 6 && n < 14) || n == 32)
-        return (1);
-    return (0);
-}
-
 int ft_atoi(const char *str)
 {
     int signal;
@@ -14,7 +7,7 @@ int ft_atoi(const char *str)
 
     signal = 1;
     result = 0;
-    while (ft_is_space(*str))
+    while ((*str > 6 && *str < 14) || *str == 32)
         str++;
     if (*str == '-' || *str == '+')
     {

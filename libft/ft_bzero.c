@@ -1,6 +1,6 @@
 #include "libft.h"
 
-void    ft_bzero(void *s, unsigned int n)
+void    ft_bzero(void *s, size_t n)
 {
     char null_char;
 
