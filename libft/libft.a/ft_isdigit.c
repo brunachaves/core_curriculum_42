@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 13:48:35 by brchaves          #+#    #+#             */
-/*   Updated: 2024/04/23 13:48:36 by brchaves         ###   ########.fr       */
+/*   Created: 2024/04/23 13:48:51 by brchaves          #+#    #+#             */
+/*   Updated: 2024/04/24 12:29:37 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isalnum(int c)
+int	ft_isdigit(int c)
 {
-	int	is_alpha;
-	int	is_digit;
-
-	is_alpha = ft_isalpha(c);
-	is_digit = ft_isdigit(c);
-	if (is_alpha || is_digit)
+	if ((c > 47 && c < 58))
 		return (1);
 	return (0);
 }
