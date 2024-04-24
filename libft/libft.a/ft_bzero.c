@@ -6,16 +6,16 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:48:12 by brchaves          #+#    #+#             */
-/*   Updated: 2024/04/23 13:48:13 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/04/24 13:29:52 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void    ft_bzero(void *s, size_t n)
+void	ft_bzero(void *s, size_t n)
 {
-    char null_char;
+	char	null_char;
 
-    null_char = '\0';
-    ft_memset(s, null_char, n);
+	null_char = '\0';
+	ft_memset(s, null_char, n);
 }
