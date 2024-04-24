@@ -26,6 +26,8 @@ char *ft_itoa(int n)
 
     digits = ft_digits(n);
     str = (char *)malloc(digits * (sizeof(int)) + 1);
+    if (str == NULL)
+        return (NULL);
     i = digits -1;
     if (n == -2147483648)
             str = "-2147483648";

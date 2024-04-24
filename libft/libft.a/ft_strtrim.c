@@ -12,27 +12,31 @@
 
 #include "libft.h"
 
+i/* nt trim_counter(char const *s1, char const *set)
+{
+    int counter;
+    int i;
+
+    counter = 0;
+    while(*s1)
+    {
+        i = 0;
+        while(set[i])
+        {
+            while (*s1 == set[i])
+            {
+                counter++;
+                s1++;
+            }
+            i++;
+        }
+
+    }
+}
+
 char    *ft_strtrim(char const *s1, char const *set)
 {
     char    *str;
-    int size;
-    int index_end;
 
-    size = ft_strlen(s1) - 2 * (ft_strlen(set) + 1);
-    str =  (char *)malloc(size * sizeof(char));
-/*     index_end = ft_strlen(s1) - 2 * (ft_strlen(set)) - 1;
-    while(*s1)
-    {
-        while (*s1 == *set)
-        {
-            s1++;
-            set++;
-        }
-        if (!(*set))
-        {
-            while(*s1 && *s1 != s1[index_end])
-            *str = *s1;
-        }
-    } */
-    
 }
+ */

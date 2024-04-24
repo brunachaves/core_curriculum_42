@@ -12,39 +12,22 @@
 
 #include "libft.h"
 
-int check_nullend(char *str)
-{
-    int i;
-    int len;
-
-    i = 0;
-    len = ft_strlen(str);
-    while(i <= len)
-    {
-        if(str[i] == '\0')
-            return (1);
-        i++;
-    }
-    return (0);
-}
-
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
     size_t result_len;
-    int i;
+    size_t max_append;
 
-    i = 0;
-    if (size == 0)
-        return (0);
-    while (dst[i])
-        i++;
-    while (*src && (i < size))
+    result_len = ft_strlen(dst) + ft_strlen(src);
+    max_append = size - ft_strlen(dst) - 1;
+    if (max_append <= 0)
+        return (result_len);
+    while (*dst)
+        dst++;
+    while(*src && max_append)
     {
-        dst[i] = *src;
-        i++;
-        src++;
+        *dst = *src;
+        max_append--;
     }
-    if (i < size)
-        dst[i] = '\0';
+    *dst = '\0';
     return (result_len);
 }
