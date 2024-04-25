@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 13:49:25 by brchaves          #+#    #+#             */
-/*   Updated: 2024/04/23 13:49:26 by brchaves         ###   ########.fr       */
+/*   Created: 2024/04/24 09:54:31 by brchaves          #+#    #+#             */
+/*   Updated: 2024/04/25 13:43:15 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_memcmp(const void *s1, const void *s2, size_t n)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-    char *c_s1;
-    char *c_s2;
-    int i;
+	char	*str_result;
+	size_t	i_strlcpy;
 
-    i = 0;
-    if (n == 0)
-		return (0);
-	while (i < n && (*c_s1 == *c_s2))
-	{
-		c_s1++;
-		c_s2++;
-		i++;
-	}
-	return (*c_s1 - *c_s2);
+	str_result = (char *)malloc(len * (sizeof(char)) + 1);
+	i_strlcpy = ft_strlcpy(str_result, (s + start), (len + 1));
+	str_result[len] = '\0';
+	return (str_result);
 }

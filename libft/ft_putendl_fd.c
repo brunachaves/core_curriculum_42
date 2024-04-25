@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/24 09:54:19 by brchaves          #+#    #+#             */
-/*   Updated: 2024/04/24 11:03:09 by brchaves         ###   ########.fr       */
+/*   Created: 2024/04/23 13:49:52 by brchaves          #+#    #+#             */
+/*   Updated: 2024/04/25 11:41:32 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char    *ft_strmapi(char const *s, char (*f)(unsigned int, char))
+void	ft_putendl_fd(char *s, int fd)
 {
-    int i;
-    int size;
-    char *new_str;
+	char	new_line;
 
-    i = 0;
-    size = ft_strlen(s) + 1;
-    new_str = (char *)malloc(size * sizeof(char));
-    ft_striteri(s, (*f)(i, s + i));
-    ft_strlcpy(new_str, s, size);
-    return (new_str);    
+	new_line = '\n';
+	ft_putstr_fd(s, fd);
+	ft_putchar_fd(new_line, fd);
 }

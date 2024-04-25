@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/24 09:53:56 by brchaves          #+#    #+#             */
-/*   Updated: 2024/04/24 10:47:54 by brchaves         ###   ########.fr       */
+/*   Created: 2024/04/24 09:53:59 by brchaves          #+#    #+#             */
+/*   Updated: 2024/04/25 11:46:52 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char    **ft_split(char const *s, char c)
+char	*ft_strchr(const char *s, int c)
 {
-    char **array;
-    char *str1;
-    char *str2;
+	int	i;
 
-    array = (char **)malloc(ft_strlen(s) * sizeof(char) + 2);
-    if (array == NULL)
-        return (NULL);
-    
-    
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == c)
+			return ((char *)(s + i));
+		i++;
+	}
+	if (c == 0)
+		return ((char *)(s + i));
+	return (NULL);
 }

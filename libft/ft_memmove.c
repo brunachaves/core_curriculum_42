@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 13:48:21 by brchaves          #+#    #+#             */
-/*   Updated: 2024/04/24 10:05:49 by brchaves         ###   ########.fr       */
+/*   Created: 2024/04/23 13:49:30 by brchaves          #+#    #+#             */
+/*   Updated: 2024/04/25 13:55:55 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void    *ft_calloc(size_t nmemb, size_t size)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-    char    *ptr;
-    int i;
+	char		*char_dest;
+	const char	*char_src;
+	char		*aux;
+	size_t		i;
 
-    i = 0;    
-    if (nmemb == 0 || size == 0)
-        return (NULL);
-    if (nmemb * size > INT_MAX || nmemb * size < INT_MIN)
-        return (NULL);
-    ptr = (char *)malloc(nmemb * size);
-    while (i < nmemb)
-    {
-        ptr[i] = 0;
-        i++;
-    }
-    return ((void *)(ptr));    
+	char_dest = dest;
+	char_src = src;
+	i = 0;
+	if (!src && !dest)
+		return (NULL);
+	while (i < n)
+	{
+		aux[i] = *char_src;
+		*char_dest = aux[i];
+		i++;
+		char_src++;
+		char_dest++;
+	}
+	return (dest);
 }

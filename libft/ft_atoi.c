@@ -1,21 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 13:48:12 by brchaves          #+#    #+#             */
-/*   Updated: 2024/04/24 13:29:52 by brchaves         ###   ########.fr       */
+/*   Created: 2024/04/23 13:47:57 by brchaves          #+#    #+#             */
+/*   Updated: 2024/04/25 12:01:11 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+int	ft_atoi(const char *str)
 {
-	char	null_char;
+	int	signal;
+	int	result;
 
-	null_char = '\0';
-	ft_memset(s, null_char, n);
+	signal = 1;
+	result = 0;
+	while ((*str > 6 && *str < 14) || *str == 32)
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			signal *= -1;
+		str++;
+	}
+	while ((*str > 47 && *str < 58))
+	{
+		result = result * 10 + (*str - 48);
+		str++;
+	}
+	return (signal * result);
 }

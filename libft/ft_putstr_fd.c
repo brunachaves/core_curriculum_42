@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 13:47:57 by brchaves          #+#    #+#             */
-/*   Updated: 2024/04/23 13:47:58 by brchaves         ###   ########.fr       */
+/*   Created: 2024/04/23 13:49:56 by brchaves          #+#    #+#             */
+/*   Updated: 2024/04/25 11:39:13 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_atoi(const char *str)
+void	ft_putstr_fd(char *s, int fd)
 {
-    int signal;
-    int result;
+	int	i;
 
-    signal = 1;
-    result = 0;
-    while ((*str > 6 && *str < 14) || *str == 32)
-        str++;
-    if (*str == '-' || *str == '+')
-    {
-        if (*str == '-')
-            signal *= -1;
-        str++;
-    }  
-    while ((*str > 47 && *str < 58))
-    {
-        result = result * 10 + (*str - 48);
-        str++;
-    }
-    return (signal * result);
+	i = 0;
+	while (s[i])
+	{
+		write (fd, s + i, 1);
+		i++;
+	}
 }

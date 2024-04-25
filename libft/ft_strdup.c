@@ -1,42 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/24 09:54:29 by brchaves          #+#    #+#             */
-/*   Updated: 2024/04/24 10:42:22 by brchaves         ###   ########.fr       */
+/*   Created: 2024/04/24 09:54:02 by brchaves          #+#    #+#             */
+/*   Updated: 2024/04/25 13:54:45 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-i/* nt trim_counter(char const *s1, char const *set)
+void	ft_strcpy(char *dest, char *src)
 {
-    int counter;
-    int i;
+	int	i;
 
-    counter = 0;
-    while(*s1)
-    {
-        i = 0;
-        while(set[i])
-        {
-            while (*s1 == set[i])
-            {
-                counter++;
-                s1++;
-            }
-            i++;
-        }
-
-    }
+	i = 0;
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
 }
 
-char    *ft_strtrim(char const *s1, char const *set)
+char	*ft_strdup(const char *src)
 {
-    char    *str;
+	char	*dest;
+	size_t	size;
 
+	size = ft_strlen(src) + 1;
+	dest = (char *)malloc(sizeof(char) * size);
+	ft_strcpy(dest, ((char *)(src)));
+	return (dest);
 }
- */

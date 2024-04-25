@@ -1,24 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/24 09:54:31 by brchaves          #+#    #+#             */
-/*   Updated: 2024/04/24 09:54:32 by brchaves         ###   ########.fr       */
+/*   Created: 2024/04/23 13:47:41 by brchaves          #+#    #+#             */
+/*   Updated: 2024/04/25 13:49:02 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char    *ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-    char *str_result;
-    size_t i_strlcpy;
+	const char	*ptr;
+	int			check;
+	int			i;
+	int			j;
 
-    str_result = (char *)malloc(len * (sizeof(char)) + 1);
-    i_strlcpy = ft_strlcpy(str_result, (s + start), (len + 1));
-    str_result[len] = '\0';
-    return (str_result);
+	i = 0;
+	if (little[0] == '\0')
+		return ((char *)(big));
+	while (i < (int)len)
+	{
+		j = 0;
+		check = 0;
+		while (big[i] == little[j])
+		{
+			check = 1;
+			i++;
+			j++;
+		}
+		if (!(little[j]) && check == 1)
+		{
+			ptr = big + i - j;
+			return ((char *)(ptr));
+		}
+		i += 1 - j;
+	}
+	return (NULL);
 }
