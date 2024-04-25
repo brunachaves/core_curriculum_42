@@ -14,7 +14,12 @@
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	char		*char_dest;
+	void	*aux;
+
+	ft_memcpy(aux, src, n);
+	ft_memcpy(dest, aux, n);
+	return(dest);
+/* 	char		*char_dest;
 	const char	*char_src;
 	char		*aux;
 
@@ -31,5 +36,5 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 		char_dest++;
 		aux++;
 	}
-	return (dest);
+	return (dest); */
 }
