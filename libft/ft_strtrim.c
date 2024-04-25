@@ -12,31 +12,6 @@
 
 #include "libft.h"
 
-char	*ft_strtrim(char const *s1, char const *set)
-{
-	char	*str;
-	int		start_index;
-	int		end_index;
-	int		size_newstr;
-	int		i;
-
-	start_index = ft_start_index(s1, set);
-	end_index = ft_end_index(s1, set);
-	size_newstr = end_index - start_index + 1;
-	str = (char *)malloc(size_newstr * sizeof(char) + 1);
-	if (str == NULL)
-		return (NULL);
-	i = 0;
-	while (start_index <= end_index)
-	{
-		str[i] = s1[start_index];
-		i++;
-		start_index++;
-	}
-	str[i] = '\0';
-	return (str);
-}
-
 int	ft_start_index(char const *s1, char const *set)
 {
 	int	start_index;
@@ -79,4 +54,29 @@ int	ft_end_index(char const *s1, char const *set)
 		check_times--; 
 	}
 	return (end_index);
+}
+
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	char	*str;
+	int		start_index;
+	int		end_index;
+	int		size_newstr;
+	int		i;
+
+	start_index = ft_start_index(s1, set);
+	end_index = ft_end_index(s1, set);
+	size_newstr = end_index - start_index + 1;
+	str = (char *)malloc(size_newstr * sizeof(char) + 1);
+	if (str == NULL)
+		return (NULL);
+	i = 0;
+	while (start_index <= end_index)
+	{
+		str[i] = s1[start_index];
+		i++;
+		start_index++;
+	}
+	str[i] = '\0';
+	return (str);
 }

@@ -36,8 +36,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	len2 = ft_strlen(s2);
 	size = len1 + len2 + 1;
 	new_str = (char *)malloc(size * (sizeof(char)));
-	ft_strcpy_modified(new_str, s1, 0);
-	ft_strcpy_modified(new_str, s2, len1);
+	ft_strcpy_join(new_str, s1, 0);
+	ft_strcpy_join(new_str, s2, len1);
 	new_str[len1 + len2] = '\0';
 	return (new_str);
 }

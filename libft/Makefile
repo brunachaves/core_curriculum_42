@@ -1,4 +1,4 @@
-CC = gcc
+CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
@@ -8,7 +8,6 @@ OBJ = $(SRC:.c=.o)
 
 NAME = libft.a
 
-DEPT = libft.h
 
 all: $(NAME) clean
 
@@ -16,7 +15,7 @@ $(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ)
 
 %.o: %.c
-	$(CC) -c $(CFLAGS) -I$(DEPT)  $< -o $@
+	$(CC) -c $(CFLAGS)  $< -o $@
 
 clean:
 	rm -f $(OBJ)
