@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:48:18 by brchaves          #+#    #+#             */
-/*   Updated: 2024/04/25 13:38:03 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/04/26 09:22:38 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putstr_fd(char *s, int fd);
 char	**ft_split(char const *s, char c);
 char	*ft_strchr(const char *s, int c);
-char	*ft_strdup(const char *s);
+char	*ft_strdup(const char *src);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
-size_t	ft_strlcat(char *dst, const char *src, size_t size);
+size_t	ft_strlcat(char *dest, const char *src, size_t size);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 size_t	ft_strlen(const char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);

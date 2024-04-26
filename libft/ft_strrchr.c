@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:54:26 by brchaves          #+#    #+#             */
-/*   Updated: 2024/04/25 13:47:40 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/04/26 10:23:29 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_strrchr(const char *s, int c)
 
 	i = 0;
 	ptr = NULL;
+	if (c > 255)
+		c = c % 256;
 	while (s[i])
 	{
 		if (s[i] == c)
