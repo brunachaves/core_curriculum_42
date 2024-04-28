@@ -36,7 +36,7 @@ void	itoa_negative(char *str, int n)
 	int		i;
 	char	c;
 
-	i = ft_nbrlen(n);
+	i = ft_nbrlen(n) - 1;
 	n *= -1;
 	while (i > 0)
 	{
@@ -74,5 +74,6 @@ char	*ft_itoa(int n)
 		i--;
 		n /= 10;
 	}
+	str[len_number] = '\0';
 	return (str);
-}
+} 

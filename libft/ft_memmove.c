@@ -16,7 +16,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 {
 	void	*aux;
 
-	aux = (void *)malloc(n);
+	aux = (void *)ft_calloc(1, n);
 	ft_memcpy(aux, src, n);
 	ft_memcpy(dest, aux, n);
 	return (dest);

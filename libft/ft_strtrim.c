@@ -15,22 +15,23 @@
 int	ft_start_index(char const *s1, char const *set)
 {
 	int	start_index;
-	int	j;
-	int	check_times;
+	int	i;
+	int	is_set;
+
 
 	start_index = 0;
-	check_times = ft_strlen(set);
-	while (s1[start_index] && check_times)
+	is_set = 1;
+	while (*s1)
 	{
-		j = 0;
-		while (set[j])
+		i = 0;
+		while (set[i] && is_set)
 		{
-			if (s1[start_index] == set[j])
-				start_index++;
-			j++;
+			if(*s1 != set[i])
+				i++;
+			
 		}
-		check_times--;
 	}
+
 	return (start_index);
 }
 
