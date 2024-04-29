@@ -69,9 +69,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 	len_newstr = (int)end_index - (int)start_index + 1;
 	if (len_newstr <= 0 || end_index == 0)
 		return (ft_strdup(""));
-	str = (char *)malloc((size_t)len_newstr * sizeof(char) + 1);
-	if (str == NULL)
-		return (NULL);
 	str = ft_substr(s1, start_index, len_newstr);
 	return (str);
 }
