@@ -19,5 +19,6 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	aux = ft_calloc(1, n);
 	ft_memcpy(aux, src, n);
 	ft_memcpy(dest, aux, n);
+	free(aux);
 	return (dest);
 }
