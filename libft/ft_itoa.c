@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:53:45 by brchaves          #+#    #+#             */
-/*   Updated: 2024/04/26 12:03:53 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/04/29 13:38:52 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,13 @@ int	ft_nbrlen(int nb)
 	len_number = 0;
 	if (nb == 0)
 		return (1);
+	if (nb == -2147483648)
+		return (11);
 	if (nb < 0)
+	{
 		len_number = 1;
+		aux_nb *= (-1);
+	}
 	while (aux_nb)
 	{
 		aux_nb /= 10;
@@ -38,6 +43,7 @@ void	itoa_negative(char *str, int n)
 
 	i = ft_nbrlen(n) - 1;
 	n *= -1;
+	str[i + 1] = '\0';
 	while (i > 0)
 	{
 		c = (n % 10) + 48;
@@ -48,25 +54,13 @@ void	itoa_negative(char *str, int n)
 	str[0] = '-';
 }
 
-char	*ft_itoa(int n)
+void	itoa_positive(char *str, int n)
 {
-	int		len_number;
 	int		i;
-	char	*str;
 	char	c;
 
-	len_number = ft_nbrlen(n);
-	i = len_number - 1;
-	if (n == -2147483648)
-		return ("-2147483648");
-	str = (char *)malloc(len_number * (sizeof(char)) + 1);
-	if (str == NULL)
-		return (NULL);
-	else if (n < 0)
-	{
-		itoa_negative(str, n);
-		return (str);
-	}
+	i = ft_nbrlen(n) - 1;
+	str[i + 1] = '\0';
 	while (i >= 0)
 	{
 		c = (n % 10) + 48;
@@ -74,6 +68,29 @@ char	*ft_itoa(int n)
 		i--;
 		n /= 10;
 	}
-	str[len_number] = '\0';
-	return (str);
-} 
+}
+
+char	*ft_itoa(int n)
+{
+	size_t		len_number;
+	size_t		i;
+	char		*str;
+
+	len_number = ft_nbrlen(n);
+	i = len_number - 1;
+	str = (char *)malloc(len_number * (sizeof(char)) + 1);
+	if (str == NULL)
+		return (NULL);
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	else if (n < 0)
+	{
+		itoa_negative(str, n);
+		return (str);
+	}
+	else
+	{
+		itoa_positive(str, n);
+		return (str);
+	}
+}

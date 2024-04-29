@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:47:41 by brchaves          #+#    #+#             */
-/*   Updated: 2024/04/26 10:51:28 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/04/29 11:31:41 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,17 @@
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	const char	*ptr;
-	int			check;
-	int			i;
-	int			j;
+	size_t	len_little;
 
-	i = 0;
-/* 	if (len < 0)
-		return ((char *)big); */
-	if (little[0] == '\0')
-		return ((char *)(big));
-	while (i < (int)len)
+	len_little = ft_strlen(little);
+	if (*little == 0)
+		return ((char *)big);
+	while (*big && len_little <= len)
 	{
-		j = 0;
-		check = 0;
-		while (big[i] == little[j])
-		{
-			check = 1;
-			i++;
-			j++;
-		}
-		if (!(little[j]) && check == 1)
-		{
-			ptr = big + i - j;
-			return ((char *)(ptr));
-		}
-		i += 1 - j;
+		if (*big == *little && ft_strncmp(big, little, len_little) == 0)
+			return ((char *)big);
+		++big;
+		--len;
 	}
 	return (NULL);
 }
