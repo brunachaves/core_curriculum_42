@@ -73,16 +73,14 @@ void	itoa_positive(char *str, int n)
 char	*ft_itoa(int n)
 {
 	size_t		len_number;
-	size_t		i;
 	char		*str;
 
 	len_number = ft_nbrlen(n);
-	i = len_number - 1;
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
 	str = (char *)malloc(len_number * (sizeof(char)) + 1);
 	if (str == NULL)
 		return (NULL);
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
 	else if (n < 0)
 	{
 		itoa_negative(str, n);
