@@ -41,18 +41,26 @@ int	ft_count_words(const char *s, char c)
 	return (counter);
 }
 
+int	ft_wordcpy_and_indexplus(int i, const char *start, const char *s, char **array)
+{
+	int len;
+
+	len = s - start;
+	array[i] = (char *)ft_calloc((len + 1), sizeof(char));
+	ft_strlcpy(array[i], start, len + 1);
+	i++;
+	return (i);
+}
+
 char	**ft_split(const char *s, char c)
 {
 	int			num_words;
 	char		**array;
 	int			i;
 	const char	*start;
-	int			len;
 
 	num_words = ft_count_words(s, c);
-	array = (char **)malloc((num_words + 1) * sizeof(char *));
-	if (array == NULL)
-		return (NULL);
+	array = (char **)ft_calloc(num_words + 1, sizeof(char *));
 	i = 0;
 	start = s;
 	while (*s)
@@ -60,27 +68,12 @@ char	**ft_split(const char *s, char c)
 		if (*s == c)
 		{
 			if (s != start)
-			{
-				len = s - start;
-				array[i] = (char *)malloc((len + 1) * sizeof(char));
-				if (array[i] == NULL)
-					return (NULL);
-				ft_strlcpy(array[i], start, len + 1);
-				i++;
-			}
+				i = ft_wordcpy_and_indexplus(i, start, s, array);
 			start = s + 1;
 		}
 		s++;
 	}
 	if (s != start)
-	{
-		len = s - start;
-		array[i] = (char *)malloc((len + 1) * sizeof(char));
-		if (array[i] == NULL)
-			return (NULL);
-		ft_strlcpy(array[i], start, len + 1);
-		i++;
-	}
-	array[i] = NULL;
+		i = ft_wordcpy_and_indexplus(i, start, s, array);
 	return (array);
 }
