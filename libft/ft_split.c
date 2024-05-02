@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:53:56 by brchaves          #+#    #+#             */
-/*   Updated: 2024/04/29 10:06:54 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/05/02 09:04:31 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ int	ft_count_words(const char *s, char c)
 	return (counter);
 }
 
-int	ft_wordcpy_and_indexplus(int i, const char *start, const char *s, char **array)
+int	wordcpy_and_indexplus(int i, const char *start, const char *s, char **arr)
 {
-	int len;
+	int	len;
 
 	len = s - start;
-	array[i] = (char *)ft_calloc((len + 1), sizeof(char));
-	ft_strlcpy(array[i], start, len + 1);
+	arr[i] = (char *)ft_calloc((len + 1), sizeof(char));
+	ft_strlcpy(arr[i], start, len + 1);
 	i++;
 	return (i);
 }
@@ -68,12 +68,12 @@ char	**ft_split(const char *s, char c)
 		if (*s == c)
 		{
 			if (s != start)
-				i = ft_wordcpy_and_indexplus(i, start, s, array);
+				i = wordcpy_and_indexplus(i, start, s, array);
 			start = s + 1;
 		}
 		s++;
 	}
 	if (s != start)
-		i = ft_wordcpy_and_indexplus(i, start, s, array);
+		i = wordcpy_and_indexplus(i, start, s, array);
 	return (array);
 }
