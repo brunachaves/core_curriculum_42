@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:54:19 by brchaves          #+#    #+#             */
-/*   Updated: 2024/04/29 13:24:00 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:52:29 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 
 	len_newstr = ft_strlen(s);
 	new_str = (char *)malloc(len_newstr * sizeof(char) + 1);
+	if (new_str == NULL)
+		return (NULL);
 	i = 0;
 	while (s[i])
 	{

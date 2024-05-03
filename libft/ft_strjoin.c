@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:54:08 by brchaves          #+#    #+#             */
-/*   Updated: 2024/04/25 13:52:36 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:50:53 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	len2 = ft_strlen(s2);
 	size = len1 + len2 + 1;
 	new_str = (char *)malloc(size * (sizeof(char)));
+	if (new_str == NULL)
+		return (NULL);
 	ft_strcpy_join(new_str, s1, 0);
 	ft_strcpy_join(new_str, s2, len1);
 	new_str[len1 + len2] = '\0';

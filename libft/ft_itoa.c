@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:53:45 by brchaves          #+#    #+#             */
-/*   Updated: 2024/04/29 13:38:52 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:52:33 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ int	ft_nbrlen(int nb)
 	len_number = 0;
 	if (nb == 0)
 		return (1);
-	if (nb == -2147483648)
-		return (11);
 	if (nb < 0)
 	{
 		len_number = 1;

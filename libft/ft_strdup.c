@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:54:02 by brchaves          #+#    #+#             */
-/*   Updated: 2024/04/25 13:54:45 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:56:41 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ char	*ft_strdup(const char *src)
 
 	size = ft_strlen(src) + 1;
 	dest = (char *)malloc(sizeof(char) * size);
+	if (dest == NULL)
+		return (NULL);
 	ft_strcpy(dest, ((char *)(src)));
 	return (dest);
 }

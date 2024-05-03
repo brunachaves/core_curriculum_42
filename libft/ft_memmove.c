@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:49:30 by brchaves          #+#    #+#             */
-/*   Updated: 2024/04/29 13:15:55 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/05/03 13:53:56 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	void	*aux;
+	char	buffer[sizeof(src)];
 
-	aux = ft_calloc(1, n);
-	ft_memcpy(aux, src, n);
-	ft_memcpy(dest, aux, n);
-	free(aux);
+	if (!src || !dest)
+		return (NULL);
+	if (n == 0)
+		return (dest);
+	ft_memcpy(buffer, src, n);
+	ft_memcpy(dest, (const void *) buffer, n);
 	return (dest);
 }
