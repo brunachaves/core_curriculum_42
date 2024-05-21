@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 13:49:15 by brchaves          #+#    #+#             */
-/*   Updated: 2024/05/21 10:48:15 by brchaves         ###   ########.fr       */
+/*   Created: 2024/05/21 12:22:57 by brchaves          #+#    #+#             */
+/*   Updated: 2024/05/21 14:02:00 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+t_list	*ft_lstlast(t_list *lst)
 {
-	unsigned char	*char_s;
-	size_t			i;
-	unsigned char	d;
+	t_list	*last_node;
 
-	char_s = (unsigned char *)s;
-	d = (unsigned char)c;
-	i = 0;
-	if (n == 0)
+	if (lst == NULL)
 		return (NULL);
-	while (i < n)
-	{
-		if (char_s[i] == d)
-			return ((void *)(s + i));
-		i++;
-	}
-	return (NULL);
+	last_node = lst;
+	while (last_node -> next)
+		last_node = last_node -> next;
+	return (last_node);
 }

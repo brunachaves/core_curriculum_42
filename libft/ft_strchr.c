@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:53:59 by brchaves          #+#    #+#             */
-/*   Updated: 2024/04/26 10:17:24 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:35:48 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	int	i;
+	int				i;
+	unsigned char	d;
 
 	i = 0;
-	if (c > 255)
-		c = c % 256;
+	d = (unsigned char)c;
 	while (s[i])
 	{
-		if (s[i] == c)
+		if (s[i] == d)
 			return ((char *)(s + i));
 		i++;
 	}
-	if (c == 0)
+	if (d == 0)
 		return ((char *)(s + i));
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:53:56 by brchaves          #+#    #+#             */
-/*   Updated: 2024/05/03 11:54:53 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/05/21 12:09:36 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,39 +41,31 @@ int	ft_count_words(const char *s, char c)
 	return (counter);
 }
 
-int	wordcpy_and_indexplus(int i, const char *start, const char *s, char **arr)
+char	**ft_split(char const *s, char c)
 {
-	int	len;
+	char	**result;
+	int		i;
+	int		len;
+	int		words;
 
-	len = s - start;
-	arr[i] = (char *)ft_calloc((len + 1), sizeof(char));
-	ft_strlcpy(arr[i], start, len + 1);
-	i++;
-	return (i);
-}
-
-char	**ft_split(const char *s, char c)
-{
-	int			num_words;
-	char		**array;
-	int			i;
-	const char	*start;
-
-	num_words = ft_count_words(s, c);
-	array = (char **)ft_calloc(num_words + 1, sizeof(char *));
+	words = ft_count_words(s, c);
 	i = 0;
-	start = s;
-	while (*s)
+	result = (char **)ft_calloc((words + 1), sizeof(char *));
+	if (!result)
+		return (NULL);
+	while (i < words)
 	{
-		if (*s == c)
-		{
-			if (s != start)
-				i = wordcpy_and_indexplus(i, start, s, array);
-			start = s + 1;
-		}
-		s++;
+		while (*s == c)
+			s++;
+		len = 0;
+		while (s[len] && s[len] != c)
+			len++;
+		result[i] = (char *)malloc((len + 1) * sizeof(char));
+		if (!result[i])
+			return (NULL);
+		ft_strlcpy(result[i], s, len + 1);
+		s += len;
+		i++;
 	}
-	if (s != start)
-		i = wordcpy_and_indexplus(i, start, s, array);
-	return (array);
+	return (result);
 }

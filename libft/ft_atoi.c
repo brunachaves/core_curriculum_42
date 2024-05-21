@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:47:57 by brchaves          #+#    #+#             */
-/*   Updated: 2024/04/25 12:01:11 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:35:07 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_atoi(const char *str)
 
 	signal = 1;
 	result = 0;
-	while ((*str > 6 && *str < 14) || *str == 32)
+	while ((*str > 8 && *str < 14) || *str == 32)
 		str++;
 	if (*str == '-' || *str == '+')
 	{
