@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:48:21 by brchaves          #+#    #+#             */
-/*   Updated: 2024/05/21 14:24:17 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/05/22 10:00:43 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*ptr;
 
-	if (nmemb == 0 || size == 0)
+	if (!nmemb || !size)
 	{
 		ptr = malloc(0);
 		return (ptr);

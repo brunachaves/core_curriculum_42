@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:49:30 by brchaves          #+#    #+#             */
-/*   Updated: 2024/05/21 11:06:08 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/05/22 09:57:43 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_memmove(void *dest, const void *src, size_t len)
 	char	*d;
 	size_t	i;
 
-	if (src == NULL && dest == NULL)
+	if (!src && !dest)
 		return (NULL);
 	d = (char *)dest;
 	s = (char *)src;

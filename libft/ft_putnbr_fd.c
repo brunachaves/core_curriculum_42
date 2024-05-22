@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:48:03 by brchaves          #+#    #+#             */
-/*   Updated: 2024/04/25 11:34:18 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/05/22 09:57:14 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_digits(int nb)
 
 	aux_nb = nb;
 	digits = 0;
-	if (nb == 0)
+	if (!nb)
 		return (1);
 	while (aux_nb)
 	{
@@ -54,7 +54,7 @@ void	ft_putnbr_fd(int n, int fd)
 
 	digits = ft_digits(n);
 	base = ft_base(digits);
-	if (n == -2147483648)
+	if (n == INT_MIN)
 		write(fd, "-2147483648", 11);
 	else if (n < 0)
 	{

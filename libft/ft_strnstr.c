@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:47:41 by brchaves          #+#    #+#             */
-/*   Updated: 2024/04/29 11:31:41 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/05/22 09:55:21 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	size_t	len_little;
 
 	len_little = ft_strlen(little);
-	if (*little == 0)
+	if (!*little)
 		return ((char *)big);
 	while (*big && len_little <= len)
 	{

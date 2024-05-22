@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 12:23:46 by brchaves          #+#    #+#             */
-/*   Updated: 2024/05/21 14:09:22 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/05/22 15:45:39 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		aux = ft_lstnew(f(lst -> content));
 		if (!aux)
 		{
-			del(new_list);
 			ft_lstclear(&new_list, (*del));
-			return (new_list);
+			return (NULL);
 		}
 		ft_lstadd_back(&new_list, aux);
 		lst = lst -> next;

@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:53:45 by brchaves          #+#    #+#             */
-/*   Updated: 2024/05/21 14:29:18 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/05/22 10:00:14 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_nbrlen(int nb)
 
 	aux_nb = nb;
 	len_number = 0;
-	if (nb == 0)
+	if (!nb)
 		return (1);
 	if (nb < 0)
 	{
@@ -74,10 +74,10 @@ char	*ft_itoa(int n)
 	char		*str;
 
 	len_number = ft_nbrlen(n);
-	if (n == -2147483648)
+	if (n == INT_MIN)
 		return (ft_strdup("-2147483648"));
 	str = (char *)malloc(len_number * (sizeof(char)) + 1);
-	if (str == NULL)
+	if (!str)
 		return (NULL);
 	else if (n < 0)
 	{

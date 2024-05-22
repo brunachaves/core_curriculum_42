@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:54:13 by brchaves          #+#    #+#             */
-/*   Updated: 2024/04/26 09:40:36 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/05/22 09:55:55 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 	len_src = ft_strlen(src);
 	limit_cpy_char = size - 1;
 	i = 0;
-	if (size == 0)
+	if (!size)
 		return (len_src);
 	while (src[i] && limit_cpy_char)
 	{
