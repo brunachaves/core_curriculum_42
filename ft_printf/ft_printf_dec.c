@@ -1,4 +1,4 @@
-#include <ft_printf.h>
+#include "ft_printf.h"
 
 int ft_printf_d(int num)
 {
@@ -6,17 +6,10 @@ int ft_printf_d(int num)
     return (ft_nbrlen(num));
 }
 
-/* int ft_printf_i(int num)
+int ft_printf_u(unsigned int num)
 {
-    
-} */
-
-int ft_printf_u(int num)
-{
-    unsigned int result;
     int count;
 
-    result = (unsigned int)num;
-    count = ft_printf_d(result);
+    count = ft_printf_d(num);
     return (count);
 }

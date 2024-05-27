@@ -1,82 +1,69 @@
-#include <ft_printf.h>
+#include "ft_printf.h"
 
 int ft_hexlen(unsigned int num)
 {
-    char    *hexadecimal;
-    int     len;
-    int     remainder;
+    int len;
+
+    len = 0;
+    if (num == 0)
+        return 1;
+    while (num)
+    {
+        num /= 16;
+        len++;
+    }
+    return len;
+}
+
+
+int ft_printf_lowx(unsigned int num)
+{
+    char *hexadecimal;
+    int len;
+    char *str;
 
     hexadecimal = "0123456789abcdef";
-    len = 0;
-    remainder = num;
-    if (num < 16)
-        return (1);
-    else
+    len = ft_hexlen(num);
+    str = = (char *)malloc(len + 1);
+    if (!str)
+        return 0;
+    str[len] = '\0';
+    len--;
+    while (len > 0)
     {
-        while (num)
-        {
-            remainder = num % 16;
-            num = num / 16;
-            len++;
-        }
-        return (len);
+        str[len] = hexadecimal[num % 16];
+        num /= 16;
+        len--;
     }
+    ft_putstr_fd(str, 1);
+    len = ft_strlen(str);
+    free(str);
+    return len;
 }
 
 int ft_printf_lowx(unsigned int num)
 {
-    char    *hexadecimal;
-    char    *str;
-    int     remainder;
-    int     len;
-
-    hexadecimal = "0123456789abcdef";
-    len = ft_hexlen(num);
-    str = (char *)malloc(len);
-    if (!str)
-        return (0);
-    if (num < 16)
-        write (1, hexadecimal + num, 1);
-        return (1);
-    while(num)
-    {
-        remainder = num % 16;
-        str[len - 1] = remainder;
-        num /= 16;
-        len--;
-    }
-    ft_putstr_fd (str, 1);
-    len = ft_strlen(str);
-    free (str);
-    return (len);
-}
-
-int ft_printf_uppx(unsigned int num)
-{
-    char    *hexadecimal;
-    char    *str;
-    int     remainder;
-    int     len;
+    char *hexadecimal;
+    int len;
+    char *str;
 
     hexadecimal = "0123456789ABCDEF";
     len = ft_hexlen(num);
-    str = (char *)malloc(len);
+    str = = (char *)malloc(len + 1);
     if (!str)
-        return (0);
-    if (num < 16)
-        write (1, hexadecimal + num, 1);
-        return (1);
-    while(num)
+        return 0;
+    str[len] = '\0';
+    len--;
+    while (len > 0)
     {
-        remainder = num % 16;
-        str[len - 1] = remainder;
+        str[len] = hexadecimal[num % 16];
         num /= 16;
         len--;
     }
-    ft_putstr_fd (str, 1);
+    ft_putstr_fd(str, 1);
     len = ft_strlen(str);
-    free (str);
-    return (len);
+    free(str);
+    return len;
 }
 
 int ft_printf_p(void *ptr)

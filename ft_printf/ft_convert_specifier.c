@@ -1,4 +1,4 @@
-#include <ft_printf.h>
+#include "ft_printf.h"
 
 int ft_is_specifier(char c)
 {
@@ -23,10 +23,10 @@ int    ft_convert(va_list ap, char specifier)
         count = ft_printf_p(va_arg(ap, void *));
     else if (specifier == 'd')
         count = ft_printf_d(va_arg(ap, int));
-/*     else if (specifier == 'i')
-        count = ft_printf_i(va_arg(ap, int)); */
+    else if (specifier == 'i')
+        count = ft_printf_d(va_arg(ap, int));
     else if (specifier == 'u')
-        count = ft_printf_u(va_arg(ap, int));
+        count = ft_printf_u(va_arg(ap, unsigned int));
     else if (specifier == 'x')
         count = ft_printf_lowx(va_arg(ap, unsigned int));
     else if (specifier == 'X')

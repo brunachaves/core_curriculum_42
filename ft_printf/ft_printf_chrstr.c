@@ -1,18 +1,21 @@
-#include <ft_printf.h>
+#include "ft_printf.h"
 
-int ft_printf_char(int num)
+int ft_printf_c(int num)
 {
-    ft_putchar_fd(num, 1);
+    char c;
+
+    c = num;
+    ft_putchar_fd(c, 1);
     return (1);
 }
 
-int ft_printf_str(char *str)
+int ft_printf_s(char *str)
 {
     ft_putstr_fd(str, 1);
     return (ft_strlen(str));
 }
 
-int ft_print_sign(char sign)
+int ft_printf_sign(char sign)
 {
     ft_putchar_fd(sign, 1);
     return (1);
