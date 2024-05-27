@@ -1,37 +1,25 @@
 #include <ft_printf.h>
 
-int ft_printf(const char *s, ...)
+int ft_printf(const char *format, ...)
 {
     va_list ap;
-    int i;
-    int total_len;
-    char *buffer;
-    char *full_str;
+    int     count;
+    int     i;
 
-    va_start(ap, s);
+    va_start(ap, format);
+    count = 0;
     i = 0;
-    while (s[i])
+    while (format[i])
     {
-        if (s[i] == '%')
+        if (format[i] == '%')
         {
-            if (ft_is_specifier(s + i))
-            {
-                buffer = ft_convert(ft_is_specifier(s + i));
-                full_str = ft_strjoin(full_str, buffer);
-                free (buffer);
-                i += 2;
-            }
-            full_str = ft_strjoin(full_str, '%');
-            i++;
+            if (ft_is_specifier(format[i + 1]))
+                count += ft_convert(ap, ft_is_specifier(format[i + 1]));
         }
-        buffer = ft_strtrim(s + i, '%');
-        full_str = ft_strjoin(full_str, buffer);
-        i += ft_strlen(buffer);
-        free (buffer);
+        count += write(1, format + i, 1);
+        i++;
     }
-    total_len = ft_strlen(full_str);
-    ft_putstr_fd(full_str, 1);
-    free (full_str);
+    count += write(1, '\0', 1);
     va_end(ap);
-    return (total_len);
+    return (count);
 }
