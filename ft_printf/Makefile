@@ -1,4 +1,4 @@
-SRCS = ft_printf.c ft_printf_hex.c ft_printf_dec.c ft_printf_chrstr.c ft_convert_specifier.c ft_printf_aux.c
+SRCS = ft_printf.c ft_printf_hex.c ft_printf_dec.c ft_printf_chrstr.c ft_convert_specifier.c ft_printf_ptr.c
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
@@ -8,6 +8,7 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = libftprintf.a
 
 LIBFT_PATH = ./libft
+
 LIBFT = $(LIBFT_PATH)/libft.a
 
 all: $(NAME)

@@ -26,9 +26,9 @@ int	ft_printf_u(unsigned int num)
 
 void	ft_putnbr_u_fd(unsigned int n, int fd)
 {
-	char	c;
+	char			c;
 	unsigned int	base;
-	int		digits;
+	int				digits;
 
 	digits = 1;
 	base = 1;

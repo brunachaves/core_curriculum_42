@@ -33,7 +33,7 @@ int	ft_convert(va_list ap, char specifier)
 	else if (specifier == 's')
 		count = ft_printf_s(va_arg(ap, char *));
 	else if (specifier == 'p')
-		count = ft_printf_p(va_arg(ap, unsigned long int));
+		count = ft_printf_p(va_arg(ap, void *));
 	else if (specifier == 'd' || specifier == 'i')
 		count = ft_printf_d(va_arg(ap, int));
 	else if (specifier == 'u')

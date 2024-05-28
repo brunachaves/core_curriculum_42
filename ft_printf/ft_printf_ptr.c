@@ -12,40 +12,46 @@
 
 #include "ft_printf.h"
 
-int	ft_hexlen(unsigned int num)
+void	ft_putptr_fd(uintptr_t ptr, int fd)
 {
-	int	len;
+	char	*hex_digits;
+	char	hex_str[16];
+	int		i;
 
-	len = 0;
-	if (num == 0)
-		return (1);
-	while (num)
+	hex_digits = "0123456789abcdef";
+	if (ptr == 0)
 	{
-		num /= 16;
-		len++;
+		write(fd, "(nil)", 5);
+		return;
 	}
-	return (len);
+	i = 0;
+	while (ptr)
+	{
+		hex_str[i++] = hex_digits[ptr % 16];
+		ptr /= 16;
+	}
+	write(fd, "0x", 2);
+	while (--i >= 0)
+		write(fd, &hex_str[i], 1);
 }
 
-int	ft_puthex_fd(unsigned long int num, char *hex_str)
+int	ft_printf_p(void *ptr)
 {
-	char	*str;
-	int		len;
+	uintptr_t address;
+	int count;
 
-	len = ft_hexlen(num);
-	str = (char *)malloc(len + 1);
-	if (!str)
-		return (0);
-	str[len] = '\0';
-	len--;
-	while (len > 0)
+	address = (uintptr_t)ptr;
+	if (address == 0)
 	{
-		str[len] = hex_str[num % 16];
-		num /= 16;
-		len--;
+		ft_putstr_fd("(nil)", 1);
+		return (5);
 	}
-	ft_putstr_fd(str, 1);
-	len = ft_strlen(str);
-	free (str);
-	return (len);
+	ft_putptr_fd(address, 1);
+	count = 2;
+	while (address)
+	{
+		address /= 16;
+		count++;
+	}
+	return (count);
 }

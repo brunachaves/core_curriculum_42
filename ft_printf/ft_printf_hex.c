@@ -32,12 +32,40 @@ int	ft_printf_uppx(unsigned int num)
 	return (count);
 }
 
-int	ft_printf_p(unsigned long int num)
+int	ft_hexlen(unsigned int num)
 {
-	char	*hexadecimal;
-	int		count;
+	int	len;
 
-	hexadecimal = "0123456789abcdef";
-	count = ft_puthex_fd(num, hexadecimal);
-	return (count);
+	len = 0;
+	if (num == 0)
+		return (1);
+	while (num)
+	{
+		num /= 16;
+		len++;
+	}
+	return (len);
+}
+
+int	ft_puthex_fd(unsigned int num, char *hex_str)
+{
+	char	*str;
+	int		len;
+	int		orig_len;
+
+	len = ft_hexlen(num);
+	orig_len = len;
+	str = (char *)malloc(len + 1);
+	if (!str)
+		return (0);
+	str[len] = '\0';
+	while (len > 0)
+	{
+		str[--len] = hex_str[num % 16];
+		num /= 16;
+	}
+	ft_putstr_fd(str, 1);
+	len = orig_len;
+	free(str);
+	return (len);
 }
