@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:21:39 by brchaves          #+#    #+#             */
-/*   Updated: 2024/05/28 11:29:05 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:52:44 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,7 @@ int	ft_printf_uppx(unsigned int num);
 int	ft_printf_sign(char sign);
 int	ft_hexlen(unsigned int num);
 int	ft_puthex_fd(unsigned long int num, char *hex_str);
+int	ft_unbrlen(unsigned int nb);
+void	ft_putnbr_u_fd(unsigned int n, int fd);
 
 #endif

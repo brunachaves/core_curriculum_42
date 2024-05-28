@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:21:22 by brchaves          #+#    #+#             */
-/*   Updated: 2024/05/28 10:23:24 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:42:48 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,23 @@ int	ft_printf_c(int num)
 
 int	ft_printf_s(char *str)
 {
-	ft_putstr_fd(str, 1);
-	return (ft_strlen(str));
+	int	count;
+
+	if (!str)
+	{
+		ft_putstr_fd("(null)", 1);
+		return (6);
+	}
+	else if (!*str)
+	{
+		return (0);
+	}
+	else
+	{
+		ft_putstr_fd(str, 1);
+		count = ft_strlen(str);
+	}
+	return (count);
 }
 
 int	ft_printf_sign(char sign)
