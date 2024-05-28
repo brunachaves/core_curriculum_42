@@ -23,9 +23,12 @@ int	ft_printf(const char *format, ...)
 	i = 0;
 	while (format[i])
 	{
-		if (format[i] == '%' && ft_is_specifier(format[i + 1]))
+		if (format[i] == '%')
 		{
-			count += ft_convert(ap, format[i + 1]);
+			if (ft_is_specifier(format[i + 1]))
+				count += ft_convert(ap, format[i + 1]);
+			else
+				count += write (1, "%%", 1);
 			i += 2;
 		}
 		else
