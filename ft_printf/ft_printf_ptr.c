@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_aux.c                                    :+:      :+:    :+:   */
+/*   ft_printf_ptr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:20:49 by brchaves          #+#    #+#             */
-/*   Updated: 2024/05/28 11:35:46 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:27:54 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_putptr_fd(uintptr_t ptr, int fd)
 	if (ptr == 0)
 	{
 		write(fd, "(nil)", 5);
-		return;
+		return ;
 	}
 	i = 0;
 	while (ptr)
@@ -37,8 +37,8 @@ void	ft_putptr_fd(uintptr_t ptr, int fd)
 
 int	ft_printf_p(void *ptr)
 {
-	uintptr_t address;
-	int count;
+	uintptr_t	address;
+	int			count;
 
 	address = (uintptr_t)ptr;
 	if (address == 0)
