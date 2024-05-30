@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:21:12 by brchaves          #+#    #+#             */
-/*   Updated: 2024/05/28 11:30:23 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/05/30 11:32:29 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,23 +49,21 @@ int	ft_hexlen(unsigned int num)
 
 int	ft_puthex_fd(unsigned int num, char *hex_str)
 {
-	char	*str;
+	char	str[9];
 	int		len;
-	int		orig_len;
+	int		i;
 
 	len = ft_hexlen(num);
-	orig_len = len;
-	str = (char *)malloc(len + 1);
-	if (!str)
-		return (0);
 	str[len] = '\0';
-	while (len > 0)
+	i = len - 1;
+	if (num == 0)
+		str[0] = hex_str[0];
+	while (num)
 	{
-		str[--len] = hex_str[num % 16];
+		str[i] = hex_str[num % 16];
 		num /= 16;
+		i--;
 	}
 	ft_putstr_fd(str, 1);
-	len = orig_len;
-	free(str);
 	return (len);
 }
