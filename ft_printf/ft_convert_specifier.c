@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:20:56 by brchaves          #+#    #+#             */
-/*   Updated: 2024/05/28 13:35:54 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/05/31 10:56:44 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ int	ft_convert(va_list ap, char specifier)
 	else if (specifier == 'X')
 		count = ft_printf_uppx(va_arg(ap, unsigned int));
 	else if (specifier == '%')
-		count = ft_printf_sign('%');
+		count = ft_printf_c('%');
 	return (count);
 }

@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:21:39 by brchaves          #+#    #+#             */
-/*   Updated: 2024/05/29 12:27:21 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/05/31 10:56:38 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int		ft_printf_d(int num);
 int		ft_printf_u(unsigned int num);
 int		ft_printf_lowx(unsigned int num);
 int		ft_printf_uppx(unsigned int num);
-int		ft_printf_sign(char sign);
 int		ft_hexlen(unsigned int num);
 int		ft_puthex_fd(unsigned int num, char *hex_str);
 int		ft_unbrlen(unsigned int nb);
