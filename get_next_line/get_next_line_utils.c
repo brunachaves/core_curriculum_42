@@ -1,102 +1,110 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 14:00:47 by brchaves          #+#    #+#             */
-/*   Updated: 2024/05/31 13:55:45 by brchaves         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "get_next_line.h"
+#include <stdlib.h>
 
-size_t ft_strlen(const char *str)
-{
-    size_t counter;
-
-	counter = 0;
-    while (str[counter] && str[counter] != '\n')
-        counter++;
-    if (str[counter] == '\n')
-        counter++;
-    return (counter);
-}
-
-char *ft_strjoin(char *s1, char *s2, size_t len2)
-{
-    char *new_str;
-    size_t len1;
-    size_t size;
-	size_t i;
-	size_t j;
-
-    len1 = ft_strlen(s1);
-    size = len1 + len2 + 1;
-    new_str = (char *)malloc(size * sizeof(char));
-	i = 0;
-	j = 0;
-    if (new_str == NULL)
-        return (NULL);
-    while (i < len1)
-	{
-		new_str[i] = s1[i];
-		i++;
-	}
-    while (j < len2)
-	{
-		new_str[i] = s2[j];
-		i++;
-		j++;
-	}
-    new_str[i] = '\0';
-    return (new_str);
-}
-
-void *ft_calloc(size_t nmemb, size_t size)
-{
-    void *ptr;
-    size_t i;
-    char *char_s;
-
-	i = 0;
-    if (nmemb == 0 || size == 0)
-        return malloc(0);
-    if (size > SIZE_MAX / nmemb)
-        return NULL;
-    ptr = malloc(nmemb * size);
-    if (ptr)
-    {
-        char_s = (char *)ptr;
-        while (i < nmemb * size)
-            char_s[i++] = '\0';
-    }
-    return (ptr);
-}
-
-int check_new_line(char *str, ssize_t bytes_read)
+int	found_newline(t_list *list)
 {
 	int	i;
 
-	i = 0;
-    while (i < bytes_read)
-    {
-        if (str[i] == '\n')
-            return (1);
-		i++;
-    }
-    return (0);
+	if (!list)
+		return (0);
+	while (list)
+	{
+		i = 0;
+		while (list->str_buffer[i] && i < BUFFER_SIZE)
+		{
+			if (list->str_buffer[i] == '\n')
+				return (1);
+			++i;
+		}
+		list = list->next;
+	}
+	return (0);
 }
 
-int len_new_line(char *str, ssize_t bytes_read)
+t_list	*ft_lstlast(t_list *lst)
 {
-    int len;
+	t_list	*last_node;
 
+	if (!lst)
+		return (NULL);
+	last_node = lst;
+	while (last_node -> next)
+		last_node = last_node -> next;
+	return (last_node);
+}
+
+
+void	copy_str(t_list *list, char *str)
+{
+	int	i;
+	int	k;
+
+	if (!list)
+		return ;
+	k = 0;
+	while (list)
+	{
+		i = 0;
+		while (list->str_buffer[i])
+		{
+			if (list->str_buffer[i] == '\n')
+			{
+				str[k++] = '\n';
+				str[k] = '\0';
+				return ;
+			}
+			str[k++] = list->str_buffer[i++];
+		}
+		list = list->next;
+	}
+	str[k] = '\0';
+}
+
+int	len_to_newline(t_list *list)
+{
+	int	i;
+	int	len;
+
+	if (!list)
+		return (0);
 	len = 0;
-    while (len < bytes_read && str[len] != '\n')
-        len++;
-    if (len < bytes_read && str[len] == '\n')
-        len++;
-    return (len);
+	while (list)
+	{
+		i = 0;
+		while (list->str_buffer[i])
+		{
+			if (list->str_buffer[i] == '\n')
+			{
+				++len;
+				return (len);
+			}
+			++i;
+			++len;
+		}
+		list = list->next;
+	}	
+	return (len);
+}
+
+void	dealloc(t_list **list, t_list *clean_node, char *buffer)
+{
+	t_list	*tmp;
+
+	if (!*list)
+		return ;
+	while (*list)
+	{
+		tmp = (*list)->next;
+		free((*list)->str_buffer);
+		free(*list);
+		*list = tmp;
+	}
+	*list = NULL;
+	if (clean_node->str_buffer[0])
+		*list = clean_node;
+	else
+	{
+		free(buffer);
+		free(clean_node);
+	}
 }

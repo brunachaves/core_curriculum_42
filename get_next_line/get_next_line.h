@@ -1,31 +1,28 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 13:57:51 by brchaves          #+#    #+#             */
-/*   Updated: 2024/05/31 13:48:21 by brchaves         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# include <unistd.h>
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10 
+# endif
+
 # include <stdlib.h>
+# include <unistd.h>
 #include <stdint.h>
 
-#ifndef BUFFER_SIZE
-#define BUFFER_SIZE 12
-#endif
+typedef struct s_list
+{
+	char			*str_buffer;
+	struct s_list	*next;
+}				t_list;
 
-char    *get_next_line(int fd);
-int len_new_line(char *str, ssize_t bytes_read);
-int check_new_line(char *str, ssize_t bytes_read);
-void *ft_calloc(size_t nmemb, size_t size);
-char *ft_strjoin(char *s1, char *s2, size_t len2);
-size_t ft_strlen(const char *str);
+int		found_newline(t_list *list);
+t_list	*ft_lstlast(t_list *lst);
+char	*get_line(t_list *list);
+void	copy_str(t_list *list, char *str);
+int		len_to_newline(t_list *list);
+void	update_list(t_list **list);
+char	*get_next_line(int fd);
+void	dealloc(t_list **list, t_list *clean_node, char *buffer);
+void	create_list(t_list **list, int fd);
 
 #endif
