@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:20:50 by brchaves          #+#    #+#             */
-/*   Updated: 2024/05/31 14:47:54 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/06/03 11:57:52 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 int	ft_printf(const char *format, ...)
 {
-	va_list			ap;
-	static int		count;
-	static int		i;
+	va_list		ap;
+	int			count;
+	int			i;
 
 	if (!format)
 		return (0);
+	count = 0;
+	i = 0;
 	va_start(ap, format);
 	while (format[i])
 	{
@@ -36,6 +38,5 @@ int	ft_printf(const char *format, ...)
 		else
 			count += write(1, &format[i++], 1);
 	}
-	va_end(ap);
-	return (count);
+	return (va_end(ap), count);
 }
