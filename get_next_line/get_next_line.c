@@ -12,34 +12,47 @@
 
 #include "get_next_line.h"
 
-char	*get_next_line(int fd)
+char *get_next_line(int fd)
 {
-	char	buffer[BUFFER_SIZE];
-	char	*line;
-	char	*temp;
-	ssize_t	bytes_read;
+    static char buffer[BUFFER_SIZE];
+    static ssize_t buffer_size;
+    static ssize_t buffer_pos = 0;
+    char *line;
+    char *temp;
+	int len;
 
-	bytes_read = read(fd, buffer, BUFFER_SIZE);
-	line = ft_calloc(1, 1);
-	if (bytes_read <= 0 || fd < 0 || BUFFER_SIZE <= 0 || !line)
-	{
-		free (line);
-		return (NULL);
-	}
-	while (bytes_read > 0)
-	{
-		buffer[bytes_read] = '\0';
-		if (check_new_line(buffer))
-		{
-			temp = ft_strjoin(line, buffer, len_new_line(buffer));
-			free (line);
-			line = temp;
-			return (line);
-		}
-		temp = ft_strjoin(line, buffer, BUFFER_SIZE);
-		free (line);
-		line = temp;
-		bytes_read = read(fd, buffer, BUFFER_SIZE);
-	}
-	return (NULL);
+	buffer_size = 0;
+	buffer_pos = 0;
+	line = (char *)ft_calloc(1, 1);
+    if (fd < 0 || BUFFER_SIZE <= 0 || !line)
+    {
+        free (line);
+        return (NULL);
+    }
+    while (1)
+    {
+        if (buffer_pos >= buffer_size)
+        {
+            buffer_size = read(fd, buffer, BUFFER_SIZE);
+            buffer_pos = 0;
+            if (buffer_size <= 0)
+                break ;
+        }
+        len = len_new_line(buffer + buffer_pos, buffer_size - buffer_pos);
+        temp = ft_strjoin(line, buffer + buffer_pos, len);
+		if (!temp)
+        {
+            free(line);
+            return NULL;
+        }
+        free (line);
+        line = temp;
+        buffer_pos += len;
+        if (check_new_line(buffer + buffer_pos - len, len))
+            return (line);
+    }
+    if (line[0] != '\0')
+        return line;
+    free(line);
+    return NULL;
 }

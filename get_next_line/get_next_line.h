@@ -22,12 +22,10 @@
 #endif
 
 char    *get_next_line(int fd);
-void	*ft_calloc(size_t nmemb, size_t size);
-int		check_new_line(char *str);
-int		len_new_line(char *str);
-char	*ft_strjoin(char *s1, char *s2, size_t len2);
-void	ft_strcpy_join(char *dest, char *src, int index_dest);
-size_t	ft_strlen(const char *str);
-void	ft_bzero(void *s, size_t n);
+int len_new_line(char *str, ssize_t bytes_read);
+int check_new_line(char *str, ssize_t bytes_read);
+void *ft_calloc(size_t nmemb, size_t size);
+char *ft_strjoin(char *s1, char *s2, size_t len2);
+size_t ft_strlen(const char *str);
 
 #endif
