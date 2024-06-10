@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/03 10:37:13 by brchaves          #+#    #+#             */
+/*   Updated: 2024/06/10 11:12:55 by brchaves         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
-#include <stdlib.h>
 
 int	found_newline(t_list *list)
 {
@@ -10,9 +21,9 @@ int	found_newline(t_list *list)
 	while (list)
 	{
 		i = 0;
-		while (list->str_buffer[i] && i < BUFFER_SIZE)
+		while (list->buffer_content[i] && i < BUFFER_SIZE)
 		{
-			if (list->str_buffer[i] == '\n')
+			if (list->buffer_content[i] == '\n')
 				return (1);
 			++i;
 		}
@@ -33,8 +44,7 @@ t_list	*ft_lstlast(t_list *lst)
 	return (last_node);
 }
 
-
-void	copy_str(t_list *list, char *str)
+void	copy_to_line(t_list *list, char *str)
 {
 	int	i;
 	int	k;
@@ -45,15 +55,15 @@ void	copy_str(t_list *list, char *str)
 	while (list)
 	{
 		i = 0;
-		while (list->str_buffer[i])
+		while (list->buffer_content[i])
 		{
-			if (list->str_buffer[i] == '\n')
+			if (list->buffer_content[i] == '\n')
 			{
 				str[k++] = '\n';
 				str[k] = '\0';
 				return ;
 			}
-			str[k++] = list->str_buffer[i++];
+			str[k++] = list->buffer_content[i++];
 		}
 		list = list->next;
 	}
@@ -71,9 +81,9 @@ int	len_to_newline(t_list *list)
 	while (list)
 	{
 		i = 0;
-		while (list->str_buffer[i])
+		while (list->buffer_content[i])
 		{
-			if (list->str_buffer[i] == '\n')
+			if (list->buffer_content[i] == '\n')
 			{
 				++len;
 				return (len);
@@ -82,7 +92,7 @@ int	len_to_newline(t_list *list)
 			++len;
 		}
 		list = list->next;
-	}	
+	}
 	return (len);
 }
 
@@ -95,12 +105,12 @@ void	dealloc(t_list **list, t_list *clean_node, char *buffer)
 	while (*list)
 	{
 		tmp = (*list)->next;
-		free((*list)->str_buffer);
+		free((*list)->buffer_content);
 		free(*list);
 		*list = tmp;
 	}
 	*list = NULL;
-	if (clean_node->str_buffer[0])
+	if (clean_node->buffer_content[0])
 		*list = clean_node;
 	else
 	{
