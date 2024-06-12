@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 09:53:20 by brchaves          #+#    #+#             */
-/*   Updated: 2024/06/10 11:13:03 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/06/12 10:16:24 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_list
 
 int		found_newline(t_list *list);
 t_list	*ft_lstlast(t_list *lst);
-char	*get_line(t_list *list);
+char	*build_line(t_list *list);
 void	copy_to_line(t_list *list, char *str);
 int		len_to_newline(t_list *list);
 void	update_list(t_list **list);

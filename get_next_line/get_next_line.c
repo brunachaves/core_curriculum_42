@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 09:56:23 by brchaves          #+#    #+#             */
-/*   Updated: 2024/06/10 11:13:10 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/06/12 11:15:51 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	update_list(t_list **list)
 	dealloc(list, clean_node, buffer);
 }
 
-char	*get_line(t_list *list)
+char	*build_line(t_list *list)
 {
 	int		len;
 	char	*next_line;
@@ -93,14 +93,24 @@ void	create_list(t_list **list, int fd)
 char	*get_next_line(int fd)
 {
 	static t_list	*list = NULL;
+	t_list			*tmp;
 	char			*next_line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &next_line, 0) < 0)
+	{
+		while (list)
+		{
+			tmp = list->next;
+			free(list->buffer_content);
+			free(list);
+			list = tmp;
+		}
 		return (NULL);
+	}
 	create_list(&list, fd);
 	if (list == NULL)
 		return (NULL);
-	next_line = get_line(list);
+	next_line = build_line(list);
 	update_list(&list);
 	return (next_line);
 }
