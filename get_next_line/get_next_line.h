@@ -2,27 +2,22 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 12 
+#  define BUFFER_SIZE 42
 # endif
 
 # include <stdlib.h>
 # include <unistd.h>
-#include <stdint.h>
+# include <stdint.h>
 
-typedef struct s_list
-{
-	char			*str_buffer;
-	struct s_list	*next;
-}				t_list;
-
-int		found_newline(t_list *list);
-t_list	*ft_lstlast(t_list *lst);
-char	*get_line(t_list *list);
-void	copy_str(t_list *list, char *str);
-int		len_to_newline(t_list *list);
-void	update_list(t_list **list);
 char	*get_next_line(int fd);
-void	dealloc(t_list **list, t_list *clean_node, char *buffer);
-void	create_list(t_list **list, int fd);
+void	ft_strcpy(char *dst, char *src);
+char	*ft_strjoin(char *s1, char *s2);
+size_t	ft_strlen(char *str);
+char	*create_temp(char *remainder, int fd);
+char	*initialize_aux(char *remainder);
+char	*get_line(char *temp);
+char	*update_remainder(char *temp);
+int		len_to_newline(char *temp);
+int		found_newline(char *temp);
 
 #endif

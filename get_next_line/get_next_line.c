@@ -1,94 +1,91 @@
 #include "get_next_line.h"
 
-void	update_list(t_list **list)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	t_list	*last_node;
-	t_list	*clean_node;
-	int		i;
-	int		k;
-	char	*buffer;
+	size_t	len1;
+	size_t	len2;
+	char	*joined;
 
-	buffer = malloc(BUFFER_SIZE + 1);
-	clean_node = malloc(sizeof(t_list));
-	if (!buffer || !clean_node)
-		return ;
-	last_node = ft_lstlast(*list);
-	i = 0;
-	k = 0;
-	while (last_node->str_buffer[i] && last_node->str_buffer[i] != '\n')
-		++i;
-	while (last_node->str_buffer[i] && last_node->str_buffer[++i])
-		buffer[k++] = last_node->str_buffer[i];
-	buffer[k] = '\0';
-	clean_node->str_buffer = buffer;
-	clean_node->next = NULL;
-	dealloc(list, clean_node, buffer);
-}
-
-char	*get_line(t_list *list)
-{
-	int		str_len;
-	char	*next_str;
-
-	if (!list)
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	joined = (char *)malloc(len1 + len2 + 1);
+	if (!joined)
 		return (NULL);
-	str_len = len_to_newline(list);
-	next_str = malloc(str_len + 1);
-	if (!next_str)
-		return (NULL);
-	copy_str(list, next_str);
-	return (next_str);
+	ft_strcpy(joined, s1);
+	ft_strcpy(joined + len1, s2);
+	free(s1);
+	return (joined);
 }
 
-void	append(t_list **list, char *buffer)
+size_t	ft_strlen(char *str)
 {
-	t_list	*new_node;
-	t_list	*last_node;
+	size_t	len;
 
-	last_node = ft_lstlast(*list);
-	new_node = malloc(sizeof(t_list));
-	if (!new_node)
-		return ;
-	if (!last_node)
-		*list = new_node;
-	else
-		last_node->next = new_node;
-	new_node->str_buffer = buffer;
-	new_node->next = NULL;
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
 }
 
-void	create_list(t_list **list, int fd)
+char	*initialize_aux(char *remainder)
 {
-	int		char_read;	
-	char	*buffer;
+	char	*aux;
 
-	while (!found_newline(*list))
+	if (remainder)
 	{
-		buffer = malloc(BUFFER_SIZE + 1);
-		if (!buffer)
-			return ;
-		char_read = read(fd, buffer, BUFFER_SIZE);
-		if (!char_read)
-		{
-			free(buffer);
-			return ;
-		}
-		buffer[char_read] = '\0';
-		append(list, buffer);
+		aux = (char *)malloc(ft_strlen(remainder) + 1);
+		if (!aux)
+			return (NULL);
+		ft_strcpy(aux, remainder);
+		free(remainder);
 	}
+	else
+	{
+		aux = (char *)malloc(1);
+		if (!aux)
+			return (NULL);
+		aux[0] = '\0';
+	}
+	return (aux);
 }
+
+char	*create_temp(char *remainder, int fd)
+{
+	char	*aux;
+	char	buffer[BUFFER_SIZE + 1];
+	int		bytes_read;
+
+	aux = initialize_aux(remainder);
+	if (!aux)
+		return (NULL);
+
+	while (!found_newline(aux))
+	{
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read <= 0)
+			break ;
+		buffer[bytes_read] = '\0';
+		aux = ft_strjoin(aux, buffer);
+	}
+	return (aux);
+}
+
 
 char	*get_next_line(int fd)
 {
-	static t_list	*list = NULL;;
-	char			*next_line;
+	static char	*remainder = NULL;
+	char		*temp;
+	char		*next_line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &next_line, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0)
 		return (NULL);
-	create_list(&list, fd);
-	if (list == NULL)
+	temp = create_temp(remainder, fd);
+	if (!temp || !*temp)
+	{
+		free(temp);
 		return (NULL);
-	next_line = get_line(list);
-	update_list(&list);
+	}
+	next_line = get_line(temp);
+	remainder = update_remainder(temp);
 	return (next_line);
 }

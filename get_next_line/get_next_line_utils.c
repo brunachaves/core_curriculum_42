@@ -1,110 +1,79 @@
 #include "get_next_line.h"
-#include <stdlib.h>
 
-int	found_newline(t_list *list)
+int	found_newline(char *temp)
 {
-	int	i;
-
-	if (!list)
+	if (!temp)
 		return (0);
-	while (list)
+	while (*temp)
 	{
-		i = 0;
-		while (list->str_buffer[i] && i < BUFFER_SIZE)
-		{
-			if (list->str_buffer[i] == '\n')
-				return (1);
-			++i;
-		}
-		list = list->next;
+		if (*temp == '\n')
+			return (1);
+		temp++;
 	}
 	return (0);
 }
 
-t_list	*ft_lstlast(t_list *lst)
+void	ft_strcpy(char *dst, char *src)
 {
-	t_list	*last_node;
-
-	if (!lst)
-		return (NULL);
-	last_node = lst;
-	while (last_node -> next)
-		last_node = last_node -> next;
-	return (last_node);
-}
-
-
-void	copy_str(t_list *list, char *str)
-{
-	int	i;
-	int	k;
-
-	if (!list)
-		return ;
-	k = 0;
-	while (list)
+	while (*src)
 	{
-		i = 0;
-		while (list->str_buffer[i])
-		{
-			if (list->str_buffer[i] == '\n')
-			{
-				str[k++] = '\n';
-				str[k] = '\0';
-				return ;
-			}
-			str[k++] = list->str_buffer[i++];
-		}
-		list = list->next;
+		*dst = *src;
+		dst++;
+		src++;
 	}
-	str[k] = '\0';
+	*dst = '\0';
 }
 
-int	len_to_newline(t_list *list)
+int	len_to_newline(char *temp)
 {
-	int	i;
 	int	len;
 
-	if (!list)
-		return (0);
 	len = 0;
-	while (list)
-	{
-		i = 0;
-		while (list->str_buffer[i])
-		{
-			if (list->str_buffer[i] == '\n')
-			{
-				++len;
-				return (len);
-			}
-			++i;
-			++len;
-		}
-		list = list->next;
-	}	
+	while (temp[len] && temp[len] != '\n')
+		len++;
+	if (temp[len] == '\n')
+		len++;
 	return (len);
 }
 
-void	dealloc(t_list **list, t_list *clean_node, char *buffer)
+char	*update_remainder(char *temp)
 {
-	t_list	*tmp;
+	char	*remainder;
+	int		i;
 
-	if (!*list)
-		return ;
-	while (*list)
+	i = 0;
+	while (temp[i] && temp[i] != '\n')
+		i++;
+	if (!temp[i])
 	{
-		tmp = (*list)->next;
-		free((*list)->str_buffer);
-		free(*list);
-		*list = tmp;
+		free(temp);
+		return (NULL);
 	}
-	*list = NULL;
-	if (clean_node->str_buffer[0])
-		*list = clean_node;
-	else
+	remainder = (char *)malloc(ft_strlen(temp + i + 1) + 1);
+	if (!remainder)
+		return (NULL);
+	i++;
+	ft_strcpy(remainder, (temp + i));
+	free(temp);
+	return (remainder);
+}
+
+char	*get_line(char *temp)
+{
+	int		len;
+	int		i;
+	char	*line;
+
+	len = len_to_newline(temp);
+	i = 0;
+	line  = (char *)malloc(len + 1);
+	if (!line)
+		return (NULL);
+	while (i <= len)
 	{
-		free(buffer);
-		free(clean_node);
+		line[i] = temp[i];
+		i++;
 	}
+	line[len] = '\0';
+	return (line);
 }
