@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 10:38:02 by brchaves          #+#    #+#             */
-/*   Updated: 2024/07/04 11:30:08 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/07/04 11:40:46 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	*create_temp(char *remainder, int fd)
 		{
 			free(aux);
 			free(buffer);
-			break ;
+			return (NULL);
 		}
 		if (bytes_read == 0)
 			break ;
