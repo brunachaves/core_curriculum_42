@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/04 10:38:05 by brchaves          #+#    #+#             */
+/*   Updated: 2024/07/04 11:14:30 by brchaves         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 int	found_newline(char *temp)
@@ -54,11 +66,11 @@ char	*update_remainder(char *temp)
 		return (NULL);
 	i++;
 	ft_strcpy(remainder, (temp + i));
-	free(temp);
+	free (temp);
 	return (remainder);
 }
 
-char	*get_line(char *temp)
+char	*get_the_line(char *temp)
 {
 	int		len;
 	int		i;
@@ -66,10 +78,10 @@ char	*get_line(char *temp)
 
 	len = len_to_newline(temp);
 	i = 0;
-	line  = (char *)malloc(len + 1);
+	line = (char *)malloc(len + 1);
 	if (!line)
 		return (NULL);
-	while (i <= len)
+	while (i < len)
 	{
 		line[i] = temp[i];
 		i++;
