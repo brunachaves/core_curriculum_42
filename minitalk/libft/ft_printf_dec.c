@@ -6,11 +6,12 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:21:27 by brchaves          #+#    #+#             */
-/*   Updated: 2024/07/01 14:14:52 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/07/17 11:54:23 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
 int	ft_printf_d(int num)
 {
 	ft_putnbr_fd(num, 1);

@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 14:13:21 by brchaves          #+#    #+#             */
-/*   Updated: 2024/07/01 14:13:22 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/07/17 11:53:13 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*get_line(char *temp)
 
 	len = len_to_newline(temp);
 	i = 0;
-	line  = (char *)malloc(len + 1);
+	line = (char *)malloc(len + 1);
 	if (!line)
 		return (NULL);
 	while (i <= len)

@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 14:13:25 by brchaves          #+#    #+#             */
-/*   Updated: 2024/07/01 14:25:14 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/07/17 11:53:46 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ char	*create_temp(char *remainder, int fd)
 	aux = initialize_aux(remainder);
 	if (!aux)
 		return (NULL);
-
 	while (!found_newline(aux))
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
@@ -71,7 +70,6 @@ char	*create_temp(char *remainder, int fd)
 	}
 	return (aux);
 }
-
 
 char	*get_next_line(int fd)
 {

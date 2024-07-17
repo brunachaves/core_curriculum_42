@@ -6,11 +6,12 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:20:50 by brchaves          #+#    #+#             */
-/*   Updated: 2024/07/01 14:15:01 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/07/17 11:50:56 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
 int	ft_printf(const char *format, ...)
 {
 	va_list		ap;

@@ -6,11 +6,12 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:20:49 by brchaves          #+#    #+#             */
-/*   Updated: 2024/07/01 14:14:57 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/07/17 11:54:09 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
 void	ft_putptr_fd(unsigned long int ptr, int fd)
 {
 	char	*hex_digits;
