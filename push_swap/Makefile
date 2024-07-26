@@ -1,4 +1,4 @@
-SRCS = push_swap.c error_handling.c
+SRCS = push_swap.c error_handling.c populate_list.c
 OBJS = $(SRCS:.c=.o)
 
 CC = cc

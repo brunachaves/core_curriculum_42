@@ -29,6 +29,8 @@ int    check_is_num(char **array)
 	while (array[i])
 	{
 		j = 0;
+        if(array[i][j] == '-')
+            j++;
 		while (array[i][j])
 		{
 			if (!is_integer(array[i][j]))
@@ -88,17 +90,17 @@ void	check_error(char **array)
 {
     if(!check_is_num(array))
     {
-        write(1, "Error\n", 6);
+        ft_printf("Error\n");
         exit (-1);
     }
     else if(!check_is_int(array))
     {
-        write(1, "Error\n", 6);
+        ft_printf("Error\n");
         exit (-1);
     }
 	else if(check_duplicates(array))
     {
-        write(1, "Error\n", 6);
+        ft_printf("Error\n");
         exit (-1);
     }
 }

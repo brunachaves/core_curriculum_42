@@ -14,9 +14,13 @@
 
 int	main(int argc, char **argv)
 {
+	t_list	*a_list;
+
 	if (argc > 1)
 	{
 		check_error(argv);
+		a_list = populate_list(argv);
 	}
+	free(a_list);
 	return(0);	
 }
