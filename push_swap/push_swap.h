@@ -17,4 +17,10 @@
 # include <stdlib.h>
 # include "libft/libft.h"
 
+int		is_integer(char c);
+int		check_is_num(char **array);
+int		check_is_int(char **array);
+int		check_duplicates(char **array);
+void	check_error(char **array);
+
 #endif
