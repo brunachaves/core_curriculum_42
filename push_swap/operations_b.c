@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void   *swap_b(t_list *b_list)
+void   *swap_b(t_list *b_list, int simultaneous)
 {   
     int  aux1;
     int  aux2;
@@ -11,8 +11,9 @@ void   *swap_b(t_list *b_list)
         aux2 = b_list->content;
         b_list->content = aux1;
         b_list->next->content = aux2;
-        ft_printf("sb\n");
     }
+    if (simultaneous == 0)
+        ft_printf("sb\n");
 }
 
 void    push_b(t_list **a_list, t_list **b_list)
@@ -28,7 +29,7 @@ void    push_b(t_list **a_list, t_list **b_list)
     }
 }
 
-void    rotate_b(t_list **b_list)
+void    rotate_b(t_list **b_list, int simultaneous)
 {
     t_list  *first;
     t_list *last;
@@ -40,11 +41,12 @@ void    rotate_b(t_list **b_list)
         last = ft_lstlast(*b_list);
         last->next = first;
         first->next =  NULL;
-        ft_printf("rb\n");
     }
+    if (simultaneous == 0)
+        ft_printf("rb\n");
 }
 
-void    rotate_reverse_b(t_list **b_list)
+void    rotate_reverse_b(t_list **b_list, int simultaneous)
 {
     t_list  *temp;
     t_list *last;
@@ -61,5 +63,6 @@ void    rotate_reverse_b(t_list **b_list)
     }
     last->next = NULL;
     ft_lstadd_front(b_list, temp);
-    ft_printf("rrb\n");
+    if (simultaneous == 0)
+        ft_printf("rrb\n");
 }
