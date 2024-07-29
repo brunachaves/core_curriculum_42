@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-t_list  *populate_list(char **str)
+t_list  *populate_list_a(char **str)
 {
     t_list *list;
     t_list  *new_node;
@@ -18,7 +18,7 @@ t_list  *populate_list(char **str)
         {
             while(list)
             {
-                tem = list;
+                temp = list;
                 list = list->next;
                 free(temp);
             }
@@ -28,4 +28,29 @@ t_list  *populate_list(char **str)
         free(new_node);
     }
     return (list);
+}
+
+t_list *init_list_b()
+{
+    t_list *b_list;
+
+    b_list = (t_list *)malloc(sizeof(t_list));
+    if (!b_list)
+    {
+        ft_printf("Error\n");
+        return (NULL);
+    }
+    return(b_list);
+}
+
+void    dealloc(t_list **list)
+{
+    t_list  *temp;
+
+    while(*list)
+    {
+        temp = (*list)->next;
+        free(*list);
+        *list = temp;
+    }
 }

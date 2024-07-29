@@ -28,12 +28,20 @@ int		check_is_num(char **array);
 int		check_is_int(char **array);
 int		check_duplicates(char **array);
 void	check_error(char **array);
-t_list  *populate_list(char **str);
+t_list  *populate_list_a(char **str);
+t_list	*init_list_b();
+void    dealloc(t_list **list);
 void	swap_a(t_list	*a_list);
 void	swap_b(t_list	*b_list);
 void	swap_s(t_list	*a_list, t_list *b_list);
-void	push_a(t_list	*a_list, t_list *b_list);
-void	push_b(t_list	*a_list, t_list *b_list);
+void	push_a(t_list	**a_list, t_list **b_list);
+void	push_b(t_list	**a_list, t_list **b_list);
+void    rotate_a(t_list **a_list);
+void    rotate_b(t_list **b_list);
+void    rotate_r(t_list **a_list, t_list **b_list);
+void    rotate_reverse_a(t_list **a_list);
+void    rotate_reverse_b(t_list **b_list);
+void    rotate_reverse_r(t_list **a_list, t_list **b_list);
 
 
 #endif

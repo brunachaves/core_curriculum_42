@@ -15,12 +15,15 @@
 int	main(int argc, char **argv)
 {
 	t_list	*a_list;
+	t_list	*b_list;
 
 	if (argc > 1)
 	{
 		check_error(argv);
-		a_list = populate_list(argv);
+		a_list = populate_list_a(argv);
+		b_list = init_list_b();
 	}
-	free(a_list);
+	dealloc(&a_list);
+	dealloc(&b_list);
 	return(0);	
 }
