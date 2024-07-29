@@ -12,11 +12,6 @@
 
 #include "minitalk.h"
 
-int	power_of_two(unsigned int num)
-{
-	return (1 << num);
-}
-
 void	bytes_to_char(const char *str)
 {
 	int	result;
