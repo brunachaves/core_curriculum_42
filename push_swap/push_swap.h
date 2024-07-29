@@ -43,5 +43,4 @@ void    rotate_reverse_a(t_list **a_list, int simultaneous);
 void    rotate_reverse_b(t_list **b_list, int simultaneous);
 void    rotate_reverse_r(t_list **a_list, t_list **b_list);
 
-
 #endif
