@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:21:27 by brchaves          #+#    #+#             */
-/*   Updated: 2024/05/29 12:26:46 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/07/30 14:20:27 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,11 @@ void	ft_putnbr_u_fd(unsigned int n, int fd)
 {
 	char			c;
 	unsigned int	base;
-	int				digits;
 
-	digits = 1;
 	base = 1;
 	while (n / base >= 10)
 	{
 		base *= 10;
-		digits++;
 	}
 	while (base > 0)
 	{
