@@ -1,4 +1,4 @@
-SRCS = push_swap.c error_handling.c populate_list.c operations_a.c operations_b.c operations_s.c 
+SRCS = push_swap.c error_handling.c populate_list.c operations_a.c operations_b.c operations_s.c sort.c
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
@@ -13,17 +13,17 @@ GREEN := \033[32m
 YELLOW := \033[33m
 RESET := \033[0m
 
-all:		${NAME}
+all:		$(NAME)
 
-%.o:	%.c
+%.o:	%.c push_swap.h
 		@echo "$(YELLOW)Compiling $<...$(RESET)"
-		${CC} ${CFLAGS} -Ilibft -c $? -o $@
+		$(CC) $(CFLAGS) -Ilibft -c $< -o $@
 
 $(NAME): program check_norm
 	@echo "$(GREEN)Build complete: $(NAME).$(RESET)"
 
-program: $(OBJS_S) libft/libft.a
-	$(CC) $(CFLAGS) $(OBJS_S) -Llibft -lft -o ${NAME}
+program:  libft/libft.a $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -Llibft -lft -o $(NAME)
 
 libft/libft.a:
 	@echo "$(YELLOW)Building libft...$(RESET)"
@@ -36,7 +36,7 @@ clean:
 
 fclean: clean
 	@make fclean -C libft
-	$(RM) program
+	$(RM) $(NAME)
 	@echo "$(YELLOW)Removing executables...$(RESET)"
 
 re:			fclean all
