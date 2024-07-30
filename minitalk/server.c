@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 12:26:35 by brchaves          #+#    #+#             */
-/*   Updated: 2024/07/17 12:13:45 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/07/30 11:38:04 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 void	bytes_to_char(const char *str)
 {
 	int	result;
-	int	length;
 	int	i;
 
 	result = 0;
-	length = ft_strlen(str);
 	i = 0;
-	while (i < length)
+	while (i < 8)
 	{
 		result = result * 2 + (str[i] - '0');
 		i++;

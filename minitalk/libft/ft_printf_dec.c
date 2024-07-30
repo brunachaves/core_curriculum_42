@@ -28,10 +28,15 @@ void	ft_putnbr_u_fd(unsigned int n, int fd)
 {
 	char			c;
 	unsigned int	base;
+	int				digits;
 
+	digits = 1;
 	base = 1;
 	while (n / base >= 10)
+	{
 		base *= 10;
+		digits++;
+	}
 	while (base > 0)
 	{
 		c = (n / base) % 10 + '0';

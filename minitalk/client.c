@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 12:33:12 by brchaves          #+#    #+#             */
-/*   Updated: 2024/07/17 11:59:38 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/07/30 11:35:07 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ void	handle_message(int pid, const char *str)
 	char	*binary;
 
 	i = 0;
-	j = 0;
 	while (str[i])
 	{
 		binary = char_to_bits(str[i]);
 		if (!binary)
 			return ;
+		j = 0;
 		while (j < 8)
 		{
 			if (binary[j] == '1')
@@ -66,7 +66,7 @@ int	main(int argc, char **argv)
 	{
 		ft_printf("Error! This is how the program should be executed:\n");
 		ft_printf("    ./client <PID NUMBER> <MESSAGE>\n");
-		exit(-1);
+		return (1);
 	}
 	pid = ft_atoi(argv[1]);
 	handle_message(pid, argv[2]);
