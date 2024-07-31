@@ -54,7 +54,6 @@ int	check_is_int(char **array)
 		if (num < INT_MIN || num > INT_MAX)
 			return (0);
 		i++;
-		num = 0;
 	}
 	return (1);
 }
@@ -71,7 +70,7 @@ int	check_duplicates(char **array)
 	{
 		num1 = ft_atoi(array[i]);
 		j = i - 1;
-		while (array[j] && j)
+		while (j)
 		{
 			num2 = ft_atoi(array[j]);
 			if (num1 == num2)

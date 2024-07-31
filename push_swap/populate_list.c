@@ -12,51 +12,25 @@
 
 #include "push_swap.h"
 
-char	*init_bits(void)
+char	*int_to_bits(int num)
 {
+	char	*bits;
 	int		i;
-	char	*str;
 
-	i = 0;
-	str = (char *)malloc(sizeof(char) * (32 + 1));
-	if (!str)
-		return (NULL);
-	str[32] = '\0';
-	while (i < 32)
-	{
-		str[i] = '0';
-		i++;
-	}
-	return (str);
-}
-
-char	*int_to_bits(char *str)
-{
-	long int	num;
-	int			i;
-	char		*bits;
-
-	num = (long int)ft_atoi(str);
 	i = 31;
-	bits = init_bits();
+	bits = (char *)malloc(sizeof(char) * (32 + 1));
 	if (!bits)
 		return (NULL);
-	if (num < 0)
+	bits[32] = '\0';
+	while (i >= 0)
 	{
-		bits[0] = '1';
-		num *= (-1);
+		if (num & 1)
+			bits[i] = '1';
+		else
+			bits[i] = '0';
+		num >>= 1;
+		i--;
 	}
-	while (num > 0 && i >= 1)
-    {
-        bits[i] = (num % 2) + '0';
-        num /= 2;
-        i--;
-    }
-    while (i >= 1)
-    {
-        bits[i] = '0';
-        i--;
-    }
 	return (bits);
 }
 
@@ -64,28 +38,20 @@ t_list	*populate_list_a(char **str)
 {
 	t_list	*list;
 	t_list	*new_node;
-	t_list	*temp;
 	int		i;
 
+	list = NULL;
 	i = 1;
-	list = ft_lstnew(int_to_bits(str[i]));
-	if (!list)
-		return (NULL);
-	while (str[++i])
+	while (str[i])
 	{
-		new_node = ft_lstnew(int_to_bits(str[i]));
+		new_node = ft_lstnew(int_to_bits(ft_atoi(str[i])));
 		if (!new_node)
 		{
-			while (list)
-			{
-				temp = list;
-				list = list->next;
-				free(temp);
-			}
+			dealloc(&list);
 			return (NULL);
 		}
 		ft_lstadd_back(&list, new_node);
-		free(new_node);
+		i++;
 	}
 	return (list);
 }
@@ -97,6 +63,7 @@ void	dealloc(t_list **list)
 	while (*list)
 	{
 		temp = (*list)->next;
+		free((*list)->content);
 		free(*list);
 		*list = temp;
 	}

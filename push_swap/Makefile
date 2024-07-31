@@ -1,4 +1,4 @@
-SRCS = push_swap.c error_handling.c populate_list.c operations_a.c operations_b.c operations_s.c sort.c
+SRCS = push_swap.c error_handling.c populate_list.c swap_operations.c rotate_operations.c push_operations.c reverse_rot_operations.c sort.c
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
@@ -13,21 +13,20 @@ GREEN := \033[32m
 YELLOW := \033[33m
 RESET := \033[0m
 
-all:		$(NAME)
+all: $(NAME)
 
-%.o:	%.c push_swap.h
-		@echo "$(YELLOW)Compiling $<...$(RESET)"
-		$(CC) $(CFLAGS) -Ilibft -c $< -o $@
+%.o: %.c push_swap.h
+	@echo "$(YELLOW)Compiling $<...$(RESET)"
+	$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): program check_norm
-	@echo "$(GREEN)Build complete: $(NAME).$(RESET)"
-
-program:  libft/libft.a $(OBJS)
+$(NAME): libft/libft.a $(OBJS) check_norm
+	@echo "$(YELLOW)Linking...$(RESET)"
 	$(CC) $(CFLAGS) $(OBJS) -Llibft -lft -o $(NAME)
+	@echo "$(GREEN)Build complete: $(NAME)$(RESET)"
 
 libft/libft.a:
 	@echo "$(YELLOW)Building libft...$(RESET)"
-	@make -C libft
+	@make bonus -C libft
 
 clean:
 	@make clean -C libft
@@ -39,11 +38,11 @@ fclean: clean
 	$(RM) $(NAME)
 	@echo "$(YELLOW)Removing executables...$(RESET)"
 
-re:			fclean all
+re: fclean all
 
 check_norm:
 	@echo "$(YELLOW)Running norminette...$(RESET)"
-	@OUTPUT=$$(norminette $(SRCS)); \
+	@OUTPUT=$$(norminette $(SRCS) push_swap.h); \
 	ERRORS=$$(echo "$$OUTPUT" | grep -v ": OK!"); \
 	if [ -z "$$ERRORS" ]; then \
 		echo "$(GREEN)Norminette success: All files passed!$(RESET)"; \
@@ -52,4 +51,4 @@ check_norm:
 		echo "$$ERRORS"; \
 	fi
 
-.PHONY: all clean fclean re libft check_norm push_swap program
+.PHONY: all clean fclean re libft check_norm push_swap

@@ -12,7 +12,23 @@
 
 #include "push_swap.h"
 
-void	sort_list(t_list *a_list)
+int	is_list_sorted(t_list *a_list)
+{
+	int num1;
+	int num2;
+
+	while (a_list && a_list->next)
+	{
+		num1 = ft_atoi(a_list->content);
+		num2 = ft_atoi(a_list->next->content);
+		if (num1 > num2)
+			return (0);
+		a_list = a_list->next;
+	}
+	return (1);
+}
+
+void	sort_list(t_list **a_list)
 {
 	int			i;
 	int			j;
@@ -21,47 +37,24 @@ void	sort_list(t_list *a_list)
 	char		*buffer;
 
 	i = 31;
-	size_list = ft_lstsize(a_list);
-	b_list = (t_list *)malloc(sizeof(t_list));
-	if (!b_list)
+	size_list = ft_lstsize(*a_list);
+	if (size_list == 1)
 		return ;
-	while (i)
+	b_list = NULL;
+	while (i >= 0 && !(is_list_sorted(*a_list)))
 	{
 		j = 0;
-		while (a_list && j < size_list)
+		while ((*a_list)->next && j < size_list && !(is_list_sorted(*a_list)))
 		{
-			buffer = (char *)malloc(sizeof(char) * 33);
-			buffer = a_list->content;
+			buffer = (*a_list)->content;
 			if (buffer[i] == '0')
-				push_b(&a_list, &b_list);
+				push_b(a_list, &b_list);
 			else
-				rotate_a(&a_list, 0);
-			free(buffer);
+				rotate_a(a_list);
 			j++;
 		}
 		while (b_list)
-		{
-			push_a(&a_list, &b_list);
-			b_list = b_list->next;
-		}
-		i++;
-	}
-	if (i == 0)
-	{
-		while (a_list && j < size_list)
-		{
-			buffer = a_list->content;
-			if (buffer[i] == '1')
-				push_b(&a_list, &b_list);
-			else
-				rotate_a(&a_list, 0);
-			free(buffer);
-			j++;
-		}
-		while (b_list)
-		{
-			push_a(&a_list, &b_list);
-			b_list = b_list->next;
-		}
+			push_a(a_list, &b_list);
+		i--;
 	}
 }

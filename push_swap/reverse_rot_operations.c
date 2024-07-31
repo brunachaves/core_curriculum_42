@@ -12,32 +12,40 @@
 
 #include "push_swap.h"
 
-void	swap_s(t_list *a_list, t_list *b_list)
+void	rotate_reverse_lst(t_list **list)
 {
-	int	simultaneous;
+	t_list	*temp;
+	t_list	*last;
+	t_list	*aux;
 
-	simultaneous = 1;
-	swap_a(a_list, simultaneous);
-	swap_b(b_list, simultaneous);
-	ft_printf("sb\n");
+	if (!list || !*list || !(*list)->next)
+		return ;
+	temp = ft_lstlast(*list);
+	aux = *list;
+	while (aux->next)
+	{
+		last = aux;
+		aux = aux->next;
+	}
+	last->next = NULL;
+	ft_lstadd_front(list, temp);
 }
 
-void	rotate_r(t_list **a_list, t_list **b_list)
+void	rotate_reverse_a(t_list **a_list)
 {
-	int	simultaneous;
+	rotate_reverse_lst(a_list);
+	ft_printf("rra\n");
+}
 
-	simultaneous = 1;
-	rotate_a(a_list, simultaneous);
-	rotate_b(b_list, simultaneous);
-	ft_printf("rr\n");
+void	rotate_reverse_b(t_list **b_list)
+{
+	rotate_reverse_lst(b_list);
+	ft_printf("rrb\n");
 }
 
 void	rotate_reverse_r(t_list **a_list, t_list **b_list)
 {
-	int	simultaneous;
-
-	simultaneous = 1;
-	rotate_reverse_a(a_list, simultaneous);
-	rotate_reverse_b(b_list, simultaneous);
+	rotate_reverse_lst(a_list);
+	rotate_reverse_lst(b_list);
 	ft_printf("rrr\n");
 }
