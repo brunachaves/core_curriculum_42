@@ -12,29 +12,68 @@
 
 #include "push_swap.h"
 
-void	sort_limits(t_list **a_list, t_list **b_list)
+void	sort_init_a(t_list **a_list)
+{
+	int first;
+	int middle;
+	int last;
+
+	first = ft_atoi((*a_list)->content);
+	middle = ft_atoi((*a_list)->next->content);
+	last = ft_atoi((*a_list)->next->next->content);
+	if (first < middle && first < last)
+	{
+		if (last < middle)
+		{
+			rotate_a(a_list);
+			swap_a(*a_list);
+			rotate_reverse_a(a_list);
+		}
+	}	
+	else if (middle < first && middle < last)
+	{
+		if (first < last)
+			swap_a(*a_list);
+		else
+		{
+			rotate_reverse_a(a_list);
+			rotate_reverse_a(a_list);
+		}
+	}
+	else if (last < first && last < middle)
+	{
+		if(first < middle)
+			rotate_reverse_a(a_list);
+		else
+		{
+			swap_a(*a_list);
+			rotate_reverse_a(a_list);
+		}
+	}
+}
+
+void	sort_small(t_list **a_list, t_list **b_list)
 {
 	int size_a;
 	int num1;
 	int num2;
 	int num3;
+	int	rot_counter;
 
 	size_a = ft_lstsize(*a_list);
-	while (size_a > 2)
+	rot_counter = 0;
+	while (size_a > 3)
 	{
 		push_b(a_list, b_list);
 		size_a = ft_lstsize(*a_list);
 	}
-	num1 = ft_atoi((*a_list)->content);
-	num2 = ft_atoi((*a_list)->next->content);
-	if (num1 > num2)
-		swap_a(*a_list);
+	sort_init_a(a_list);
 	while(*b_list)
 	{
 		num1 = ft_atoi((*a_list)->content);
-		num2 = ft_atoi((*a_list)->next->content);
+		num2 = ft_atoi((ft_lstlast(*a_list))->content);
 		num3 = ft_atoi((*b_list)->content);
-		if (num3 < num1)
+		if(num3 < num1)
 			push_a(a_list, b_list);
 		else if (num3 > num2)
 		{
@@ -43,18 +82,16 @@ void	sort_limits(t_list **a_list, t_list **b_list)
 		}
 		else
 		{
-			if (num1 - num3 < num3 - num2)
+			while(num3 > num1)
 			{
-				push_a(a_list, b_list);
-				swap_a(*a_list);
+				rot_counter++;
+				rotate_a(a_list);
+				num1 = ft_atoi((*a_list)->content);
+				if(num3 < num1)
+					push_a(a_list, b_list);
 			}
-			else
-			{
+			while (rot_counter--)
 				rotate_reverse_a(a_list);
-				push_a(a_list, b_list);
-				rotate_a(a_list);
-				rotate_a(a_list);
-			}
 		}
 	}
 }
@@ -88,10 +125,10 @@ void	sort_list(t_list **a_list)
 	if (size_list == 1)
 		return ;
 	b_list = NULL;
+	if(size_list < 10 && !is_list_sorted(*a_list))
+		sort_small(a_list, &b_list);
 	while (i >= 0 && !(is_list_sorted(*a_list)))
 	{
-		if(size_list < 10)
-			sort_limits(a_list, &b_list);
 		j = 0;
 		while ((*a_list) && j < size_list && !(is_list_sorted(*a_list)))
 		{
