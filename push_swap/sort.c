@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	sort_init_a(t_list **a_list)
+void	sort_three_a(t_list **a_list)
 {
 	int first;
 	int middle;
@@ -65,9 +65,9 @@ void	sort_small(t_list **a_list, t_list **b_list)
 	while (size_a > 3)
 	{
 		push_b(a_list, b_list);
-		size_a = ft_lstsize(*a_list);
+		size_a--;;
 	}
-	sort_init_a(a_list);
+	sort_three_a(a_list);
 	while(*b_list)
 	{
 		num1 = ft_atoi((*a_list)->content);
@@ -87,9 +87,8 @@ void	sort_small(t_list **a_list, t_list **b_list)
 				rot_counter++;
 				rotate_a(a_list);
 				num1 = ft_atoi((*a_list)->content);
-				if(num3 < num1)
-					push_a(a_list, b_list);
 			}
+			push_a(a_list, b_list);
 			while (rot_counter--)
 				rotate_reverse_a(a_list);
 		}
@@ -122,12 +121,15 @@ void	sort_list(t_list **a_list)
 
 	i = 31;
 	size_list = ft_lstsize(*a_list);
-	if (size_list == 1)
+	if (size_list <= 1 || is_list_sorted(*a_list))
 		return ;
 	b_list = NULL;
-	if(size_list < 10 && !is_list_sorted(*a_list))
+	if(size_list <= 10)
+	{
 		sort_small(a_list, &b_list);
-	while (i >= 0 && !(is_list_sorted(*a_list)))
+		return ;
+	}
+	while (i >= 1 && !(is_list_sorted(*a_list)))
 	{
 		j = 0;
 		while ((*a_list) && j < size_list && !(is_list_sorted(*a_list)))
@@ -142,5 +144,20 @@ void	sort_list(t_list **a_list)
 		while (b_list)
 			push_a(a_list, &b_list);
 		i--;
+	}
+	while(!is_list_sorted(*a_list))
+	{
+		j = 0;
+		while ((*a_list) && j < size_list && !(is_list_sorted(*a_list)))
+		{
+			buffer = (*a_list)->content;
+			if (buffer[i] == '1')
+				push_b(a_list, &b_list);
+			else
+				rotate_a(a_list);
+			j++;
+		}
+		while (b_list)
+			push_a(a_list, &b_list);
 	}
 }
