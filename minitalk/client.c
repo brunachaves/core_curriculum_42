@@ -6,28 +6,32 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 12:33:12 by brchaves          #+#    #+#             */
-/*   Updated: 2024/07/30 11:35:07 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/08/05 13:31:25 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-char	*char_to_bits(char c)
+volatile sig_atomic_t	g_received = 0;
+
+void	acknowleged(int signum)
 {
-	char	*binary;
+	(void)signum;
+	g_received = 1;
+}
+
+void	*char_to_bits(char c, char *binary)
+{
 	int		i;
 
 	i = 7;
-	binary = (char *)malloc(sizeof(char) * 9);
-	if (!binary)
-		return (NULL);
-	binary[8] = '\0';
 	while (i >= 0)
 	{
 		binary[i] = (c % 2) + '0';
 		c /= 2;
 		i--;
 	}
+	binary[8] = '\0';
 	return (binary);
 }
 
@@ -35,14 +39,13 @@ void	handle_message(int pid, const char *str)
 {
 	int		i;
 	int		j;
-	char	*binary;
+	char	binary[9];
 
 	i = 0;
+	signal(SIGUSR1, acknowleged);
 	while (str[i])
 	{
-		binary = char_to_bits(str[i]);
-		if (!binary)
-			return ;
+		char_to_bits(str[i], binary);
 		j = 0;
 		while (j < 8)
 		{
@@ -50,10 +53,11 @@ void	handle_message(int pid, const char *str)
 				kill(pid, SIGUSR1);
 			else
 				kill(pid, SIGUSR2);
-			usleep(100);
 			j++;
+			g_received = 0;
+			while (!g_received)
+				usleep(100);
 		}
-		free (binary);
 		i++;
 	}
 }
