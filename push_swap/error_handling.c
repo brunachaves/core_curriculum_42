@@ -87,16 +87,19 @@ void	check_error(char **array)
 	if (!check_is_num(array))
 	{
 		ft_printf("Error\n");
-		exit (-1);
+		free_array(array);
+		exit (1);
 	}
 	else if (!check_is_int(array))
 	{
 		ft_printf("Error\n");
-		exit (-1);
+		free_array(array);
+		exit (1);
 	}
 	else if (check_duplicates(array))
 	{
 		ft_printf("Error\n");
-		exit (-1);
+		free_array(array);
+		exit (1);
 	}
 }

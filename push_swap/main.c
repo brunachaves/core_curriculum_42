@@ -1,44 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations_a.c                                     :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 12:10:30 by brchaves          #+#    #+#             */
-/*   Updated: 2024/07/30 13:55:24 by brchaves         ###   ########.fr       */
+/*   Created: 2024/07/24 11:21:46 by brchaves          #+#    #+#             */
+/*   Updated: 2024/07/30 13:57:50 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap_lst(t_list *lst)
+int	main(int argc, char **argv)
 {
-	void	*aux;
+	t_stack	*a_stack;
+	t_stack	*b_stack;
+	char 	**array;
 
-	if (lst && lst->next)
+	a_stack = NULL;
+	b_stack = NULL;
+	if (argc == 1 || argc > 2 || (argc == 2 && !argv[1][0]))
+		return (1);
+	if (argc == 2)
 	{
-		aux = lst->content;
-		lst->content = lst->next->content;
-		lst->next->content = aux;
+		array = ft_split(argv[1], ' ');
+		check_error(array);
+		a_stack = populate_stack_a(array);
 	}
-}
-
-void	swap_a(t_list *a_list)
-{
-	swap_lst(a_list);
-	ft_printf("sa\n");
-}
-
-void	swap_b(t_list *b_list)
-{
-	swap_lst(b_list);
-	ft_printf("sb\n");
-}
-
-void	swap_s(t_list *a_list, t_list *b_list)
-{
-	swap_lst(a_list);
-	swap_lst(b_list);
-	ft_printf("sb\n");
+	if(array)
+		free_array(array);
+	free_stack(&a_stack);
+	free_stack(&b_stack);
+	return (0);
 }

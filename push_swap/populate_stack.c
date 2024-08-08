@@ -12,59 +12,57 @@
 
 #include "push_swap.h"
 
-char	*int_to_bits(int num)
-{
-	char	*bits;
-	int		i;
 
-	i = 31;
-	bits = (char *)malloc(sizeof(char) * (32 + 1));
-	if (!bits)
+t_stack	*populate_stack_a(char **array)
+{
+	int		i;
+	int		num;
+	t_stack	*stack;
+
+	if(!array)
 		return (NULL);
-	bits[32] = '\0';
-	while (i >= 0)
+	i = 0;
+	stack = (t_stack *)malloc(sizeof(t_stack));
+	if(!stack)
+		return (NULL);
+	while(array[i])
 	{
-		if (num & 1)
-			bits[i] = '1';
-		else
-			bits[i] = '0';
-		num >>= 1;
-		i--;
-	}
-	return (bits);
-}
-
-t_list	*populate_list_a(char **str)
-{
-	t_list	*list;
-	t_list	*new_node;
-	int		i;
-
-	list = NULL;
-	i = 1;
-	while (str[i])
-	{
-		new_node = ft_lstnew(int_to_bits(ft_atoi(str[i])));
-		if (!new_node)
-		{
-			dealloc(&list);
-			return (NULL);
-		}
-		ft_lstadd_back(&list, new_node);
+		num = ft_atoi(array[i]);
+		stack_append(&stack, num);
 		i++;
 	}
-	return (list);
+	return(stack);	
 }
 
-void	dealloc(t_list **list)
+void	free_stack(t_stack **stack)
 {
-	t_list	*temp;
+	t_stack	*temp;
+    t_stack *current;
 
-	while (*list)
+    if(!stack)
+        return ;
+    current = *stack;
+	while (*stack)
 	{
-		temp = (*list)->next;
-		free((*list)->content);
-		free(*list);
-		*list = temp;
+		temp = current->next;
+		free(current);
+		current = temp;
 	}
+    *stack = NULL;
 }
+
+void	free_array(char **array)
+{
+	int	i;
+
+	i = 0;
+	if (!array || !(*array))
+		return ;
+	while (array[i])
+    {
+		free(array[i]);
+        i++;
+    }
+    free(array[i]);
+}
+

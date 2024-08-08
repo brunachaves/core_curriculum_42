@@ -1,4 +1,5 @@
-SRCS = push_swap.c error_handling.c populate_list.c swap_operations.c rotate_operations.c push_operations.c reverse_rot_operations.c sort.c
+SRCS = main.c error_handling.c populate_stack.c operations_swap.c operations_rotate.c operations_push.c \
+operations_reverse_rot.c sort_small_stack.c utils.c
 OBJS = $(SRCS:.c=.o)
 
 CC = cc

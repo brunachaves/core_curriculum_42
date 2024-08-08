@@ -1,29 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   operations_a.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/24 11:21:46 by brchaves          #+#    #+#             */
-/*   Updated: 2024/07/30 13:57:50 by brchaves         ###   ########.fr       */
+/*   Created: 2024/07/30 12:10:30 by brchaves          #+#    #+#             */
+/*   Updated: 2024/07/30 13:55:24 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+void	swap_stack(t_stack *stack)
 {
-	t_list	*a_list;
+	int	aux;
 
-	if (argc > 1)
+	if (stack && stack->next)
 	{
-		check_error(argv);
-		a_list = populate_list_a(argv);
-		if (!a_list)
-			return (1);
-		sort_list(&a_list);
-		dealloc(&a_list);
+		aux = stack->value;
+		stack->value = stack->next->value;
+		stack->next->value = aux;
 	}
-	return (0);
+}
+
+void	swap_a(t_stack *a_list)
+{
+	swap_stack(a_list);
+	ft_printf("sa\n");
+}
+
+void	swap_b(t_stack *b_list)
+{
+	swap_stack(b_list);
+	ft_printf("sb\n");
+}
+
+void	swap_s(t_stack *a_list, t_stack *b_list)
+{
+	swap_stack(a_list);
+	swap_stack(b_list);
+	ft_printf("sb\n");
 }
