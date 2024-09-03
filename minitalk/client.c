@@ -1,28 +1,16 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/16 12:33:12 by brchaves          #+#    #+#             */
-/*   Updated: 2024/08/05 13:31:25 by brchaves         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minitalk.h"
 
-volatile sig_atomic_t	g_received = 0;
+volatile sig_atomic_t	g_ack_received = 0;
 
-void	acknowleged(int signum)
+void	ack_handler(int signum)
 {
 	(void)signum;
-	g_received = 1;
+	g_ack_received = 1;
 }
 
 void	*char_to_bits(char c, char *binary)
 {
-	int		i;
+	int	i;
 
 	i = 7;
 	while (i >= 0)
@@ -42,21 +30,59 @@ void	handle_message(int pid, const char *str)
 	char	binary[9];
 
 	i = 0;
-	signal(SIGUSR1, acknowleged);
-	while (str[i])
+	while (str[i++])
 	{
 		char_to_bits(str[i], binary);
 		j = 0;
 		while (j < 8)
 		{
+			g_ack_received = 0;
 			if (binary[j] == '1')
-				kill(pid, SIGUSR1);
+			{
+				if (kill(pid, SIGUSR1) == -1)
+				{
+					ft_printf("Error sending SIGUSR1");
+					exit(1);
+				}
+			}
 			else
-				kill(pid, SIGUSR2);
+			{
+				if (kill(pid, SIGUSR2) == -1)
+				{
+					ft_printf("Error sending SIGUSR2");
+					exit(1);
+				}
+			}
+			while (g_ack_received)
+				pause();
 			j++;
-			g_received = 0;
-			while (!g_received)
-				usleep(100);
+		}
+	}
+}
+
+void	handle_error(char **argv)
+{
+	int	pid;
+	int	i;
+
+	pid = ft_atoi(argv[1]);
+	i = 0;
+	if (!argv[2][0])
+	{
+		ft_printf("You should enter a non-empty text as second argument.\n");
+		exit (1);
+	}
+	if (pid <= 0)
+	{
+		ft_printf("Check your given PID, please.\n");
+		exit (1);
+	}
+	while (argv[1][i])
+	{
+		if (!ft_strchr("0123456789", argv[1][i]))
+		{
+			ft_printf("Check your given PID, please.\n");
+			exit (1);
 		}
 		i++;
 	}
@@ -64,7 +90,7 @@ void	handle_message(int pid, const char *str)
 
 int	main(int argc, char **argv)
 {
-	int	pid;
+	int		pid;
 
 	if (argc != 3)
 	{
@@ -72,6 +98,8 @@ int	main(int argc, char **argv)
 		ft_printf("    ./client <PID NUMBER> <MESSAGE>\n");
 		return (1);
 	}
+	signal(SIGUSR1, ack_handler);
+	handle_error(argv);
 	pid = ft_atoi(argv[1]);
 	handle_message(pid, argv[2]);
 	return (0);
