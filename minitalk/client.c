@@ -30,59 +30,17 @@ void	handle_message(int pid, const char *str)
 	char	binary[9];
 
 	i = 0;
-	while (str[i++])
+	while (str[i])
 	{
 		char_to_bits(str[i], binary);
 		j = 0;
 		while (j < 8)
 		{
 			g_ack_received = 0;
-			if (binary[j] == '1')
-			{
-				if (kill(pid, SIGUSR1) == -1)
-				{
-					ft_printf("Error sending SIGUSR1");
-					exit(1);
-				}
-			}
-			else
-			{
-				if (kill(pid, SIGUSR2) == -1)
-				{
-					ft_printf("Error sending SIGUSR2");
-					exit(1);
-				}
-			}
-			while (g_ack_received)
+			check_error_signal(binary, j, pid);
+			while (!g_ack_received)
 				pause();
 			j++;
-		}
-	}
-}
-
-void	handle_error(char **argv)
-{
-	int	pid;
-	int	i;
-
-	pid = ft_atoi(argv[1]);
-	i = 0;
-	if (!argv[2][0])
-	{
-		ft_printf("You should enter a non-empty text as second argument.\n");
-		exit (1);
-	}
-	if (pid <= 0)
-	{
-		ft_printf("Check your given PID, please.\n");
-		exit (1);
-	}
-	while (argv[1][i])
-	{
-		if (!ft_strchr("0123456789", argv[1][i]))
-		{
-			ft_printf("Check your given PID, please.\n");
-			exit (1);
 		}
 		i++;
 	}
@@ -90,7 +48,7 @@ void	handle_error(char **argv)
 
 int	main(int argc, char **argv)
 {
-	int		pid;
+	int	pid;
 
 	if (argc != 3)
 	{
@@ -98,9 +56,9 @@ int	main(int argc, char **argv)
 		ft_printf("    ./client <PID NUMBER> <MESSAGE>\n");
 		return (1);
 	}
-	signal(SIGUSR1, ack_handler);
-	handle_error(argv);
 	pid = ft_atoi(argv[1]);
+	check_error_arg(argv, pid);
+	signal(SIGUSR1, ack_handler);
 	handle_message(pid, argv[2]);
 	return (0);
 }

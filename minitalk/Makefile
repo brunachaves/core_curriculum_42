@@ -1,8 +1,8 @@
-SRCS = server.c client.c
+SRCS = server.c client.c error_handling.c
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -I.
 
 RM = rm -f
 
@@ -17,7 +17,7 @@ all:		${NAME}
 
 %.o:	%.c
 		@echo "$(YELLOW)Compiling $<...$(RESET)"
-		${CC} ${CFLAGS} -Ilibft -c $? -o $@
+		${CC} ${CFLAGS} ${INLCUDES} -c $? -o $@
 
 $(NAME): server client check_norm
 	@echo "$(GREEN)Build complete: $(NAME).$(RESET)"
@@ -25,8 +25,8 @@ $(NAME): server client check_norm
 server: server.o libft/libft.a
 	$(CC) $(CFLAGS) server.o -Llibft -lft -o server
 
-client: client.o libft/libft.a
-	$(CC) $(CFLAGS) client.o -Llibft -lft -o client
+client: client.o error_handling.o libft/libft.a
+	$(CC) $(CFLAGS) client.o error_handling.o -Llibft -lft -o client
 
 libft/libft.a:
 	@echo "$(YELLOW)Building libft...$(RESET)"
