@@ -104,7 +104,7 @@ void	set_target_node(t_stack *a_stack, t_stack *b_stack)
 			current_a = current_a->next;
 		}
 		if (!target_node)
-            b_stack->target_node = get_smallest(a_stack);
+			b_stack->target_node = get_smallest(a_stack);
 		else
 			b_stack->target_node = target_node;
 		b_stack = b_stack->next;

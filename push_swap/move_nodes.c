@@ -14,14 +14,14 @@
 
 void	move_cheapest_up(t_stack **b_stack, t_stack *cheapest_node)
 {
-	int 	cheap_position;
+	int		cheap_position;
 	int		cheap_above_median;
 
 	cheap_position = cheapest_node->position;
 	cheap_above_median = cheapest_node->above_median;
 	while (cheap_position)
 	{
-		if(cheap_above_median)
+		if (cheap_above_median)
 			rotate_b(b_stack);
 		else
 			rotate_reverse_b(b_stack);
@@ -29,7 +29,7 @@ void	move_cheapest_up(t_stack **b_stack, t_stack *cheapest_node)
 	}
 }
 
-void	move_target_up(t_stack  **a_stack, t_stack *target_node)
+void	move_target_up(t_stack **a_stack, t_stack *target_node)
 {
 	int		target_position;
 	int		target_above_median;
@@ -46,39 +46,38 @@ void	move_target_up(t_stack  **a_stack, t_stack *target_node)
 	}
 }
 
-void	move_both_up(t_stack  **a_stack, t_stack **b_stack, t_stack *cheapest_node, t_stack *target_node)
+void	move_both_up(t_stack **a, t_stack **b, t_stack *ch_nd, t_stack *tg_nd)
 {
 	int		target_position;
 	int		target_above_median;
-	int 	cheap_position;
+	int		cheap_position;
 	int		cheap_above_median;
 
-	cheap_position = cheapest_node->position;
-	cheap_above_median = cheapest_node->above_median;
-	target_position = target_node->position;
-	target_above_median = target_node->above_median;
-	
-	while(cheap_position && target_position)
+	cheap_position = ch_nd->position;
+	cheap_above_median = ch_nd->above_median;
+	target_position = tg_nd->position;
+	target_above_median = tg_nd->above_median;
+	while (cheap_position && target_position)
 	{
 		if (cheap_above_median && target_above_median)
-			rotate_r(a_stack, b_stack);
+			rotate_r(a, b);
 		else if (!cheap_above_median && !target_above_median)
-			rotate_reverse_r(a_stack, b_stack);
+			rotate_reverse_r(a, b);
 		cheap_position--;
 		target_position--;
 	}
 }
 
-void	move_nodes(t_stack  **a_stack, t_stack **b_stack, t_stack *cheapest_node)
+void	move_nodes(t_stack **a_stack, t_stack **b_stack, t_stack *cheap_node)
 {
 	t_stack	*target_node;
 
-	target_node = cheapest_node->target_node;
-	if (cheapest_node->above_median && target_node->above_median)
-		move_both_up(a_stack, b_stack, cheapest_node, target_node);
-	else if (!cheapest_node->above_median && !target_node->above_median)
-		move_both_up(a_stack, b_stack, cheapest_node, target_node);
-	move_cheapest_up(b_stack, cheapest_node);
+	target_node = cheap_node->target_node;
+	if (cheap_node->above_median && target_node->above_median)
+		move_both_up(a_stack, b_stack, cheap_node, target_node);
+	else if (!cheap_node->above_median && !target_node->above_median)
+		move_both_up(a_stack, b_stack, cheap_node, target_node);
+	move_cheapest_up(b_stack, cheap_node);
 	move_target_up(a_stack, target_node);
 	push_a(a_stack, b_stack);
 }

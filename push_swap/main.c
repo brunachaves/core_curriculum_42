@@ -30,12 +30,7 @@ int	main(int argc, char **argv)
 	check_error(array);
 	a_stack = populate_stack_a(array);
 	if (!is_sorted(a_stack))
-	{
-		if (stack_size(a_stack) == 3)
-			sort_three(&a_stack);
-		else
-			push_swap(&a_stack, &b_stack);
-	}
+		push_swap(&a_stack, &b_stack);
 	if (argc == 2)
 		free_array(array);
 	free_stack(&a_stack);

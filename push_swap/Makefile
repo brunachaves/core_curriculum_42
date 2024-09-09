@@ -1,6 +1,6 @@
 SRCS = main.c error_handling.c push_swap.c populate_and_free.c \
 operations_swap.c operations_rotate.c operations_push.c operations_reverse_rot.c \
-get_nodes.c move_nodes.c set_values.c stack_utils.c
+get_nodes.c move_nodes.c set_values.c stack_utils.c sort_small.c
 
 OBJS = $(SRCS:.c=.o)
 

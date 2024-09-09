@@ -61,9 +61,9 @@ t_stack	*get_cheapest(t_stack *stack)
 
 void	put_ascendent_order(t_stack **a_stack)
 {
-	t_stack *smallest_node;
+	t_stack	*smallest_node;
 	int		smallest_above_median;
-	
+
 	smallest_node = get_smallest(*a_stack);
 	smallest_above_median = smallest_node->above_median;
 	while (*a_stack != smallest_node)
@@ -72,6 +72,6 @@ void	put_ascendent_order(t_stack **a_stack)
 			rotate_a(a_stack);
 		else
 			rotate_reverse_a(a_stack);
-		*a_stack = (*a_stack)->next;	
+		*a_stack = (*a_stack)->next;
 	}
 }
