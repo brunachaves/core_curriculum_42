@@ -60,9 +60,9 @@ void	stack_add_up(t_stack **stack, t_stack *new)
 	new->next = aux;
 }
 
-int	stack_size(t_stack *stack)
+unsigned int	stack_size(t_stack *stack)
 {
-	int	size;
+	unsigned int	size;
 
 	size = 0;
 	while (stack)

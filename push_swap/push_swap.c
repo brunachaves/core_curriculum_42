@@ -14,6 +14,11 @@
 
 int	is_sorted(t_stack *stack)
 {
+	unsigned int	size;
+
+	size = stack_size(stack);
+	if (size <= 1)
+		return (1);
 	while (stack && stack->next)
 	{
 		if (stack->value > stack->next->value)
@@ -47,27 +52,15 @@ void	sort_three(t_stack **stack)
 		swap_a(*stack);
 }
 
-void	put_ascendent_order(t_stack **a_stack)
+void	sort_small(t_stack **a_stack)
 {
-	t_stack *smallest_node;
-	int		smallest_above_median;
-	
-	smallest_node = get_smallest(*a_stack);
-	smallest_above_median = smallest_node->above_median;
-	while (*a_stack != smallest_node)
-	{
-		if (smallest_above_median)
-			rotate_a(a_stack);
-		else
-			rotate_reverse_a(a_stack);
-		*a_stack = (*a_stack)->next;	
-	}
+
 }
 
 void	push_swap(t_stack **a_stack, t_stack **b_stack)
 {
 	int		size_a;
-	t_stack	*cheapiest_node;
+	t_stack	*cheapest_node;
 
 	size_a = stack_size(*a_stack);
 	while (size_a > 3)
@@ -79,8 +72,8 @@ void	push_swap(t_stack **a_stack, t_stack **b_stack)
 	while (*b_stack)
 	{
 		set_all_attributes(*a_stack, *b_stack);
-		cheapiest_node = get_cheapiest(*b_stack);
-		move_nodes(a_stack, b_stack, cheapiest_node);
+		cheapest_node = get_cheapest(*b_stack);
+		move_nodes(a_stack, b_stack, cheapest_node);
 	}
 	put_ascendent_order(a_stack);
 	free_stack(b_stack);

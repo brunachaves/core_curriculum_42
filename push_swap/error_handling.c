@@ -24,7 +24,7 @@ int	check_is_num(char **array)
 	int	i;
 	int	j;
 
-	i = 1;
+	i = 0;
 	while (array[i])
 	{
 		j = 0;
@@ -46,7 +46,7 @@ int	check_is_int(char **array)
 	int			i;
 	long int	num;
 
-	i = 1;
+	i = 0;
 	num = 0;
 	while (array[i])
 	{
@@ -65,12 +65,12 @@ int	check_duplicates(char **array)
 	int	num1;
 	int	num2;
 
-	i = 2;
+	i = 0;
 	while (array[i])
 	{
 		num1 = ft_atoi(array[i]);
 		j = i - 1;
-		while (j)
+		while (j >= 0)
 		{
 			num2 = ft_atoi(array[j]);
 			if (num1 == num2)
@@ -84,7 +84,13 @@ int	check_duplicates(char **array)
 
 void	check_error(char **array)
 {
-	if (!check_is_num(array))
+	if (!array ||!(*array))
+	{
+		ft_printf("Error\n");
+		free_array(array);
+		exit (1);
+	}
+	else if (!check_is_num(array))
 	{
 		ft_printf("Error\n");
 		free_array(array);

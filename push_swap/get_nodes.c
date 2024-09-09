@@ -49,12 +49,29 @@ t_stack	*get_smallest(t_stack *stack)
 	return (smallest_node);
 }
 
-t_stack	*get_cheapiest(t_stack *stack)
+t_stack	*get_cheapest(t_stack *stack)
 {
-	t_stack	*cheapiest_node;
+	t_stack	*cheapest_node;
 
 	while (!(stack->cheapest))
 		stack = stack->next;
-	cheapiest_node = stack;
-	return (cheapiest_node);
+	cheapest_node = stack;
+	return (cheapest_node);
+}
+
+void	put_ascendent_order(t_stack **a_stack)
+{
+	t_stack *smallest_node;
+	int		smallest_above_median;
+	
+	smallest_node = get_smallest(*a_stack);
+	smallest_above_median = smallest_node->above_median;
+	while (*a_stack != smallest_node)
+	{
+		if (smallest_above_median)
+			rotate_a(a_stack);
+		else
+			rotate_reverse_a(a_stack);
+		*a_stack = (*a_stack)->next;	
+	}
 }

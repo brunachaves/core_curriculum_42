@@ -12,13 +12,13 @@
 
 #include "push_swap.h"
 
-void	move_cheapiest_up(t_stack **b_stack, t_stack *cheapiest_node)
+void	move_cheapest_up(t_stack **b_stack, t_stack *cheapest_node)
 {
 	int 	cheap_position;
 	int		cheap_above_median;
 
-	cheap_position = cheapiest_node->position;
-	cheap_above_median = cheapiest_node->above_median;
+	cheap_position = cheapest_node->position;
+	cheap_above_median = cheapest_node->above_median;
 	while (cheap_position)
 	{
 		if(cheap_above_median)
@@ -46,15 +46,15 @@ void	move_target_up(t_stack  **a_stack, t_stack *target_node)
 	}
 }
 
-void	move_both_up(t_stack  **a_stack, t_stack **b_stack, t_stack *cheapiest_node, t_stack *target_node)
+void	move_both_up(t_stack  **a_stack, t_stack **b_stack, t_stack *cheapest_node, t_stack *target_node)
 {
 	int		target_position;
 	int		target_above_median;
 	int 	cheap_position;
 	int		cheap_above_median;
 
-	cheap_position = cheapiest_node->position;
-	cheap_above_median = cheapiest_node->above_median;
+	cheap_position = cheapest_node->position;
+	cheap_above_median = cheapest_node->above_median;
 	target_position = target_node->position;
 	target_above_median = target_node->above_median;
 	
@@ -69,16 +69,16 @@ void	move_both_up(t_stack  **a_stack, t_stack **b_stack, t_stack *cheapiest_node
 	}
 }
 
-void	move_nodes(t_stack  **a_stack, t_stack **b_stack, t_stack *cheapiest_node)
+void	move_nodes(t_stack  **a_stack, t_stack **b_stack, t_stack *cheapest_node)
 {
 	t_stack	*target_node;
 
-	target_node = cheapiest_node->target_node;
-	if (cheapiest_node->above_median && target_node->above_median)
-		move_both_up(a_stack, b_stack, cheapiest_node, target_node);
-	else if (!cheapiest_node->above_median && !target_node->above_median)
-		move_both_up(a_stack, b_stack, cheapiest_node, target_node);
-	move_cheapiest_up(b_stack, cheapiest_node);
+	target_node = cheapest_node->target_node;
+	if (cheapest_node->above_median && target_node->above_median)
+		move_both_up(a_stack, b_stack, cheapest_node, target_node);
+	else if (!cheapest_node->above_median && !target_node->above_median)
+		move_both_up(a_stack, b_stack, cheapest_node, target_node);
+	move_cheapest_up(b_stack, cheapest_node);
 	move_target_up(a_stack, target_node);
 	push_a(a_stack, b_stack);
 }

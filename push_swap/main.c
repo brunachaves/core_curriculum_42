@@ -21,14 +21,14 @@ int	main(int argc, char **argv)
 	a_stack = NULL;
 	b_stack = NULL;
 	array = NULL;
-	if (argc == 1 || argc > 2 || (argc == 2 && !argv[1][0]))
+	if (argc == 1 || (argc == 2 && !argv[1][0]))
 		return (1);
 	if (argc == 2)
-	{
 		array = ft_split(argv[1], ' ');
-		check_error(array);
-		a_stack = populate_stack_a(array);
-	}
+	else if (argc > 2)
+		array = argv + 1;
+	check_error(array);
+	a_stack = populate_stack_a(array);
 	if (!is_sorted(a_stack))
 	{
 		if (stack_size(a_stack) == 3)
@@ -36,6 +36,8 @@ int	main(int argc, char **argv)
 		else
 			push_swap(&a_stack, &b_stack);
 	}
-	free_all(&a_stack, array);
+	if (argc == 2)
+		free_array(array);
+	free_stack(&a_stack);
 	return (0);
 }

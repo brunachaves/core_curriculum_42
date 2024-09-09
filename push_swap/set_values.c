@@ -91,6 +91,7 @@ void	set_target_node(t_stack *a_stack, t_stack *b_stack)
 	while (b_stack)
 	{
 		aux_value = LONG_MAX;
+		target_node = NULL;
 		current_a = a_stack;
 		while (current_a)
 		{
@@ -102,8 +103,8 @@ void	set_target_node(t_stack *a_stack, t_stack *b_stack)
 			}
 			current_a = current_a->next;
 		}
-		if (LONG_MAX == aux_value)
-			b_stack->target_node = get_smallest(a_stack);
+		if (!target_node)
+            b_stack->target_node = get_smallest(a_stack);
 		else
 			b_stack->target_node = target_node;
 		b_stack = b_stack->next;

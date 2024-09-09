@@ -55,14 +55,14 @@ void	free_array(char **array)
 	int	i;
 
 	i = 0;
-	if (!array || !(*array))
+	if (!array)
 		return ;
 	while (array[i])
 	{
 		free(array[i]);
 		i++;
 	}
-	free(array[i]);
+	free(array);
 }
 
 void	free_all(t_stack **stack, char **array)
