@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 11:39:45 by brchaves          #+#    #+#             */
-/*   Updated: 2024/09/06 11:12:29 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/09/10 12:07:14 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,30 +82,27 @@ int	check_duplicates(char **array)
 	return (0);
 }
 
-void	check_error(char **array)
+int	check_error(char **array)
 {
 	if (!array ||!(*array))
 	{
 		ft_printf("Error\n");
-		free_array(array);
-		exit (1);
+		return (1);
 	}
 	else if (!check_is_num(array))
 	{
 		ft_printf("Error\n");
-		free_array(array);
-		exit (1);
+		return (1);
 	}
 	else if (!check_is_int(array))
 	{
 		ft_printf("Error\n");
-		free_array(array);
-		exit (1);
+		return (1);
 	}
 	else if (check_duplicates(array))
 	{
 		ft_printf("Error\n");
-		free_array(array);
-		exit (1);
+		return (1);
 	}
+	return (0);
 }

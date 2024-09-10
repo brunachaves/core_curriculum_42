@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 10:49:47 by brchaves          #+#    #+#             */
-/*   Updated: 2024/09/06 11:14:05 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/09/10 13:54:38 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ t_stack	*get_biggest(t_stack *stack)
 	int		second;
 	int		third;
 
+	if (!stack || !stack->next || !stack->next->next)
+		return (NULL);
 	first = stack->value;
 	second = stack->next->value;
 	third = stack->next->next->value;
@@ -37,6 +39,7 @@ t_stack	*get_smallest(t_stack *stack)
 	long int	smallest_value;
 
 	smallest_value = LONG_MAX;
+	smallest_node = NULL;
 	while (stack)
 	{
 		if (stack->value < smallest_value)
@@ -53,9 +56,16 @@ t_stack	*get_cheapest(t_stack *stack)
 {
 	t_stack	*cheapest_node;
 
-	while (!(stack->cheapest))
+	cheapest_node = NULL;
+	while (stack)
+	{
+		if (stack->cheapest)
+		{
+			cheapest_node = stack;
+			break ;
+		}
 		stack = stack->next;
-	cheapest_node = stack;
+	}
 	return (cheapest_node);
 }
 
@@ -66,12 +76,13 @@ void	put_ascendent_order(t_stack **a_stack)
 
 	smallest_node = get_smallest(*a_stack);
 	smallest_above_median = smallest_node->above_median;
+	if (!smallest_node)
+		return ;
 	while (*a_stack != smallest_node)
 	{
 		if (smallest_above_median)
-			rotate_a(a_stack);
-		else
 			rotate_reverse_a(a_stack);
-		*a_stack = (*a_stack)->next;
+		else
+			rotate_a(a_stack);
 	}
 }

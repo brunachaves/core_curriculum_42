@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 10:59:31 by brchaves          #+#    #+#             */
-/*   Updated: 2024/09/06 12:29:02 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/09/10 13:43:50 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,22 @@ void	set_push_price(t_stack *a_stack, t_stack *b_stack)
 
 	a_size = stack_size(a_stack);
 	b_size = stack_size(b_stack);
+	if (!a_stack || !b_stack)
+		return ;
 	while (b_stack)
 	{
+		if (!b_stack->target_node)
+		{
+			b_stack = b_stack->next;
+			continue ;
+		}
 		b_stack->push_price = b_stack->position;
 		if (!(b_stack->above_median))
-			b_stack->push_price = b_size - (b_stack->position);
-		if (b_stack->target_node->above_median)
+			b_stack->push_price = b_size - b_stack->position;
+		if (b_stack->target_node->above_median) 
 			b_stack->push_price += b_stack->target_node->position;
 		else
-			b_stack->push_price += a_size - (b_stack->target_node->position);
+			b_stack->push_price += a_size - b_stack->target_node->position;
 		b_stack = b_stack->next;
 	}
 }
@@ -65,12 +72,12 @@ void	set_cheapest(t_stack *b_stack)
 	long int	cheapest_price;
 	t_stack		*aux_node;
 
+	cheapest_price = LONG_MAX;
+	aux_node = NULL;
 	if (!b_stack)
 		return ;
-	cheapest_price = LONG_MAX;
 	while (b_stack)
 	{
-		b_stack->cheapest = 0;
 		if (b_stack->push_price < cheapest_price)
 		{
 			cheapest_price = b_stack->push_price;
@@ -78,7 +85,8 @@ void	set_cheapest(t_stack *b_stack)
 		}
 		b_stack = b_stack->next;
 	}
-	aux_node->cheapest = 1;
+	if (aux_node)
+		aux_node->cheapest = 1;
 }
 
 void	set_target_node(t_stack *a_stack, t_stack *b_stack)
@@ -91,7 +99,6 @@ void	set_target_node(t_stack *a_stack, t_stack *b_stack)
 	while (b_stack)
 	{
 		aux_value = LONG_MAX;
-		target_node = NULL;
 		current_a = a_stack;
 		while (current_a)
 		{
@@ -103,7 +110,7 @@ void	set_target_node(t_stack *a_stack, t_stack *b_stack)
 			}
 			current_a = current_a->next;
 		}
-		if (!target_node)
+		if (aux_value == LONG_MAX)
 			b_stack->target_node = get_smallest(a_stack);
 		else
 			b_stack->target_node = target_node;

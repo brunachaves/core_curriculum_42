@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 10:59:37 by brchaves          #+#    #+#             */
-/*   Updated: 2024/09/06 11:16:57 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/09/10 12:15:58 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,10 @@ t_stack	*populate_stack_a(char **array)
 	int		num;
 	t_stack	*stack;
 
+	stack = NULL;
 	if (!array)
 		return (NULL);
 	i = 0;
-	stack = (t_stack *)malloc(sizeof(t_stack));
-	if (!stack)
-		return (NULL);
 	while (array[i])
 	{
 		num = ft_atoi(array[i]);
@@ -36,16 +34,14 @@ t_stack	*populate_stack_a(char **array)
 void	free_stack(t_stack **stack)
 {
 	t_stack	*temp;
-	t_stack	*current;
 
 	if (!stack)
 		return ;
-	current = *stack;
 	while (*stack)
 	{
-		temp = current->next;
-		free(current);
-		current = temp;
+		temp = (*stack)->next;
+		free(*stack);
+		*stack = temp;
 	}
 	*stack = NULL;
 }
@@ -67,6 +63,8 @@ void	free_array(char **array)
 
 void	free_all(t_stack **stack, char **array)
 {
-	free_array(array);
-	free_stack(stack);
+	if (array)
+		free_array(array);
+	if (stack)
+		free_stack(stack);
 }

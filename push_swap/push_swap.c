@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 10:59:20 by brchaves          #+#    #+#             */
-/*   Updated: 2024/09/06 12:26:20 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/09/10 13:47:18 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ void	set_all_attributes(t_stack *a_stack, t_stack *b_stack)
 {
 	set_position(a_stack);
 	set_position(b_stack);
+	set_target_node(a_stack, b_stack);
 	set_above_median(a_stack);
 	set_above_median(b_stack);
 	set_push_price(a_stack, b_stack);
 	set_cheapest(b_stack);
-	set_target_node(a_stack, b_stack);
 }
 
 void	push_swap(t_stack **a_stack, t_stack **b_stack)
@@ -45,7 +45,7 @@ void	push_swap(t_stack **a_stack, t_stack **b_stack)
 	t_stack	*cheapest_node;
 
 	size_a = stack_size(*a_stack);
-	if (size_a <= 5)
+	if (size_a <= 3)
 		sort_small(a_stack);
 	else
 	{

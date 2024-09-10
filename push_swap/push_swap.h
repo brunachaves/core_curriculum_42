@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 11:21:49 by brchaves          #+#    #+#             */
-/*   Updated: 2024/09/06 12:26:39 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/09/10 13:30:40 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "libft/libft.h"
+# include <stdio.h>
 
 typedef struct s_stack
 {
@@ -33,7 +34,7 @@ int		is_integer(char c);
 int		check_is_num(char **array);
 int		check_is_int(char **array);
 int		check_duplicates(char **array);
-void	check_error(char **array);
+int		check_error(char **array);
 void	swap_lst(t_stack *lst);
 void	swap_a(t_stack	*a_stack);
 void	swap_b(t_stack	*b_stack);
@@ -75,5 +76,6 @@ void	move_cheapest_up(t_stack **b_stack, t_stack *cheapest_node);
 void	move_target_up(t_stack **a_stack, t_stack *target_node);
 void	move_both_up(t_stack **a, t_stack **b, t_stack *ch_nd, t_stack *tg_nd);
 void	move_nodes(t_stack **a_stack, t_stack **b_stack, t_stack *cheap_node);
+char	**create_array(char **argv, int argc);
 
 #endif

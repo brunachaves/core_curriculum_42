@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 11:53:26 by brchaves          #+#    #+#             */
-/*   Updated: 2024/09/06 12:28:08 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/09/10 13:56:14 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	move_cheapest_up(t_stack **b_stack, t_stack *cheapest_node)
 
 	cheap_position = cheapest_node->position;
 	cheap_above_median = cheapest_node->above_median;
-	while (cheap_position)
+	while (cheap_position && *b_stack)
 	{
 		if (cheap_above_median)
 			rotate_b(b_stack);
@@ -36,12 +36,12 @@ void	move_target_up(t_stack **a_stack, t_stack *target_node)
 
 	target_position = target_node->position;
 	target_above_median = target_node->above_median;
-	while (target_position)
+	while (target_position && *a_stack)
 	{
 		if (target_above_median)
-			rotate_a(a_stack);
-		else
 			rotate_reverse_a(a_stack);
+		else
+			rotate_a(a_stack);
 		target_position--;
 	}
 }
