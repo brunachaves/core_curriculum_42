@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 12:29:27 by brchaves          #+#    #+#             */
-/*   Updated: 2024/07/30 11:16:34 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/09/10 11:03:13 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ void	ack_handler(int signum);
 void	*char_to_bits(char c, char *binary);
 void	handle_message(int pid, const char *str);
 void	check_error_arg(char **argv, int pid);
-void	check_error_signal(char *binary, int j, int pid);
+void	send_signal(char *binary, int j, int pid);
 
 #endif

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_handling.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/06 10:35:53 by brchaves          #+#    #+#             */
+/*   Updated: 2024/09/10 11:03:04 by brchaves         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minitalk.h"
 
 void	check_error_arg(char **argv, int pid)
@@ -26,7 +38,7 @@ void	check_error_arg(char **argv, int pid)
 	}
 }
 
-void	check_error_signal(char *binary, int j, int pid)
+void	send_signal(char *binary, int j, int pid)
 {
 	if (binary[j] == '1')
 	{

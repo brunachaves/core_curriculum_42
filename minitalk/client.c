@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/06 10:35:47 by brchaves          #+#    #+#             */
+/*   Updated: 2024/09/10 11:20:15 by brchaves         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minitalk.h"
 
 volatile sig_atomic_t	g_ack_received = 0;
@@ -37,7 +49,7 @@ void	handle_message(int pid, const char *str)
 		while (j < 8)
 		{
 			g_ack_received = 0;
-			check_error_signal(binary, j, pid);
+			send_signal(binary, j, pid);
 			while (!g_ack_received)
 				pause();
 			j++;
