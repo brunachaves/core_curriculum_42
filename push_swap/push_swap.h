@@ -71,7 +71,7 @@ void	set_position(t_stack *stack);
 void	set_above_median(t_stack *stack);
 void	set_push_price(t_stack *a_stack, t_stack *b_stack);
 void	set_cheapest(t_stack *b_stack);
-void	set_target_node(t_stack *a_stack, t_stack *b_stack);
+void	set_target_node(t_stack *a_stack, t_stack *b_stack, t_stack *tg_aux);
 void	move_cheapest_up(t_stack **b_stack, t_stack *cheapest_node);
 void	move_target_up(t_stack **a_stack, t_stack *target_node);
 void	move_both_up(t_stack **a, t_stack **b, t_stack *ch_nd, t_stack *tg_nd);

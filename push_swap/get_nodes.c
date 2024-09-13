@@ -81,8 +81,8 @@ void	put_ascendent_order(t_stack **a_stack)
 	while (*a_stack != smallest_node)
 	{
 		if (smallest_above_median)
-			rotate_reverse_a(a_stack);
-		else
 			rotate_a(a_stack);
+		else
+			rotate_reverse_a(a_stack);
 	}
 }

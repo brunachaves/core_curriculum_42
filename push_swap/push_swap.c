@@ -30,9 +30,12 @@ int	is_sorted(t_stack *stack)
 
 void	set_all_attributes(t_stack *a_stack, t_stack *b_stack)
 {
+	t_stack	*target_aux;
+
+	target_aux = NULL;
 	set_position(a_stack);
 	set_position(b_stack);
-	set_target_node(a_stack, b_stack);
+	set_target_node(a_stack, b_stack, target_aux);
 	set_above_median(a_stack);
 	set_above_median(b_stack);
 	set_push_price(a_stack, b_stack);
@@ -61,6 +64,7 @@ void	push_swap(t_stack **a_stack, t_stack **b_stack)
 			cheapest_node = get_cheapest(*b_stack);
 			move_nodes(a_stack, b_stack, cheapest_node);
 		}
+		set_all_attributes(*a_stack, *b_stack);
 		put_ascendent_order(a_stack);
 		free_stack(b_stack);
 	}

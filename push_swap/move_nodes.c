@@ -14,57 +14,49 @@
 
 void	move_cheapest_up(t_stack **b_stack, t_stack *cheapest_node)
 {
-	int		cheap_position;
 	int		cheap_above_median;
 
-	cheap_position = cheapest_node->position;
 	cheap_above_median = cheapest_node->above_median;
-	while (cheap_position && *b_stack)
+	while (cheapest_node->position && *b_stack)
 	{
 		if (cheap_above_median)
 			rotate_b(b_stack);
 		else
 			rotate_reverse_b(b_stack);
-		cheap_position--;
+		set_position(*b_stack);
 	}
 }
 
 void	move_target_up(t_stack **a_stack, t_stack *target_node)
 {
-	int		target_position;
 	int		target_above_median;
 
-	target_position = target_node->position;
 	target_above_median = target_node->above_median;
-	while (target_position && *a_stack)
+	while (target_node->position && *a_stack)
 	{
 		if (target_above_median)
-			rotate_reverse_a(a_stack);
-		else
 			rotate_a(a_stack);
-		target_position--;
+		else
+			rotate_reverse_a(a_stack);
+		set_position(*a_stack);
 	}
 }
 
 void	move_both_up(t_stack **a, t_stack **b, t_stack *ch_nd, t_stack *tg_nd)
 {
-	int		target_position;
 	int		target_above_median;
-	int		cheap_position;
 	int		cheap_above_median;
 
-	cheap_position = ch_nd->position;
 	cheap_above_median = ch_nd->above_median;
-	target_position = tg_nd->position;
 	target_above_median = tg_nd->above_median;
-	while (cheap_position && target_position)
+	while (ch_nd->position && tg_nd->position)
 	{
 		if (cheap_above_median && target_above_median)
 			rotate_r(a, b);
 		else if (!cheap_above_median && !target_above_median)
 			rotate_reverse_r(a, b);
-		cheap_position--;
-		target_position--;
+		set_position(*a);
+		set_position(*b);
 	}
 }
 
