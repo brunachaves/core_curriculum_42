@@ -3,7 +3,6 @@ OBJS = $(SRCS:.c=.o)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I.
-
 RM = rm -f
 
 NAME = minitalk
@@ -13,20 +12,27 @@ GREEN := \033[32m
 YELLOW := \033[33m
 RESET := \033[0m
 
-all:		${NAME}
-
-%.o:	%.c
-		@echo "$(YELLOW)Compiling $<...$(RESET)"
-		${CC} ${CFLAGS} ${INLCUDES} -c $? -o $@
-
-$(NAME): server client check_norm
-	@echo "$(GREEN)Build complete: $(NAME).$(RESET)"
+all: check_norm server client
 
 server: server.o libft/libft.a
+	@echo "$(YELLOW)Building server...$(RESET)"
 	$(CC) $(CFLAGS) server.o -Llibft -lft -o server
 
 client: client.o error_handling.o libft/libft.a
+	@echo "$(YELLOW)Building client...$(RESET)"
 	$(CC) $(CFLAGS) client.o error_handling.o -Llibft -lft -o client
+
+server.o: server.c
+	@echo "$(YELLOW)Compiling server.o...$(RESET)"
+	$(CC) $(CFLAGS) -c server.c -o server.o
+
+client.o: client.c
+	@echo "$(YELLOW)Compiling client.o...$(RESET)"
+	$(CC) $(CFLAGS) -c client.c -o client.o
+
+error_handling.o: error_handling.c
+	@echo "$(YELLOW)Compiling error_handling.o...$(RESET)"
+	$(CC) $(CFLAGS) -c error_handling.c -o error_handling.o
 
 libft/libft.a:
 	@echo "$(YELLOW)Building libft...$(RESET)"
@@ -42,7 +48,7 @@ fclean: clean
 	$(RM) server client
 	@echo "$(YELLOW)Removing executables...$(RESET)"
 
-re:			fclean all
+re: fclean all
 
 check_norm:
 	@echo "$(YELLOW)Running norminette...$(RESET)"
@@ -55,4 +61,4 @@ check_norm:
 		echo "$$ERRORS"; \
 	fi
 
-.PHONY: all clean fclean re libft server client check_norm
+.PHONY: all clean fclean re libft check_norm

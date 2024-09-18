@@ -6,7 +6,7 @@
 /*   By: brchaves <brchaves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 10:35:53 by brchaves          #+#    #+#             */
-/*   Updated: 2024/09/10 11:03:04 by brchaves         ###   ########.fr       */
+/*   Updated: 2024/09/17 11:53:30 by brchaves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	send_signal(char *binary, int j, int pid)
 	{
 		if (kill(pid, SIGUSR1) == -1)
 		{
-			ft_printf("Error sending SIGUSR1");
+			ft_printf("Error sending SIGUSR1.\n");
 			exit(1);
 		}
 	}
@@ -52,7 +52,7 @@ void	send_signal(char *binary, int j, int pid)
 	{
 		if (kill(pid, SIGUSR2) == -1)
 		{
-			ft_printf("Error sending SIGUSR2");
+			ft_printf("Error sending SIGUSR2.\n");
 			exit(1);
 		}
 	}
